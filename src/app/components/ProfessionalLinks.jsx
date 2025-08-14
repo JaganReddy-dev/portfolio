@@ -8,7 +8,7 @@ const ProfessionalLinks = () => {
       <div className="flex md:flex-row items-center flex-col w-full justify-center gap-5 mt-5">
         <ProfessionalCard
           projectName="LinkedIn"
-          src="/Linkedin.png"
+          src="/LinkedIn.png"
           link="https://www.linkedin.com/in/jagan368/"
         />
         <ProfessionalCard
