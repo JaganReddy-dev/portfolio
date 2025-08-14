@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Typewriter from "./ui/TypeWriter";
-import HeroImg from "../../../public/Hero.png";
 
 const Hero = () => {
   const tech = [
@@ -24,11 +23,12 @@ const Hero = () => {
         {/* Left - Profile */}
         <div className="flex flex-col items-center">
           <Image
-            src={HeroImg}
+            src="/Hero.png"
             alt="Profile picture of Jagan Reddy"
             className="w-40 h-40 rounded-full object-cover hover:cursor-pointer"
             priority
-            placeholder="blur"
+            width={160}
+            height={160}
           />
           <div className="mt-5 text-center">
             <h1 className="text-2xl font-bold">Hello,</h1>

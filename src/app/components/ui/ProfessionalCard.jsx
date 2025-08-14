@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProfessionalCard = ({ link, path, projectName }) => {
+const ProfessionalCard = ({ link, src, projectName }) => {
   return (
     <Link
       href={link}
@@ -17,7 +17,7 @@ const ProfessionalCard = ({ link, path, projectName }) => {
 
         <div className="relative overflow-hidden rounded-lg">
           <Image
-            src={path}
+            src={src}
             width={300}
             height={300}
             alt={projectName}

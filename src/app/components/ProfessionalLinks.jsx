@@ -1,8 +1,5 @@
 import React from "react";
 import ProfessionalCard from "./ui/ProfessionalCard";
-import GihubImage from "../../../public/Github.png";
-import LinkedinImage from "../../../public/Linkedin.png";
-import MediumImage from "../../../public/Medium.png";
 
 const ProfessionalLinks = () => {
   return (
@@ -11,17 +8,17 @@ const ProfessionalLinks = () => {
       <div className="flex md:flex-row items-center flex-col w-full justify-center gap-5 mt-5">
         <ProfessionalCard
           projectName="LinkedIn"
-          path={LinkedinImage}
+          src="/Linkedin.png"
           link="https://www.linkedin.com/in/jagan368/"
         />
         <ProfessionalCard
           projectName="Medium"
-          path={MediumImage}
+          src="/Medium.png"
           link="https://medium.com/@jagan_reddy"
         />
         <ProfessionalCard
           projectName="Github"
-          path={GihubImage}
+          src="/Github.png"
           link="https://github.com/JaganReddy-dev/"
         />
       </div>
