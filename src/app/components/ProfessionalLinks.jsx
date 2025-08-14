@@ -18,7 +18,7 @@ const ProfessionalLinks = () => {
         />
         <ProfessionalCard
           projectName="Github"
-          src="/Github.png"
+          src="/GitHub.png"
           link="https://github.com/JaganReddy-dev/"
         />
       </div>

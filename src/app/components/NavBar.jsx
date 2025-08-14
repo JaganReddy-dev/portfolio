@@ -29,7 +29,7 @@ const NavBar = () => {
     const element = document.getElementById(targetId);
 
     if (element) {
-      const headerOffset = 100;
+      const headerOffset = 70;
       const elementPosition = element.offsetTop;
       const offsetPosition = elementPosition - headerOffset;
 
