@@ -40,9 +40,10 @@ const Hero = () => {
         {/* Right - About */}
         <div className="md:w-1/2">
           <p className="text-lg leading-relaxed">
-            I am a software engineer with a passion for web development and
-            creating innovative solutions. I specialize in building interactive
-            and user-friendly web applications.
+            I am a software engineer with with a Master's degree and AWS
+            certification, passionate about web development and creating
+            innovative solutions. I specialize in building interactive and
+            user-friendly web applications.
             <br />
             <br />
             <span className="">My primary tools of choice Includes:</span>
