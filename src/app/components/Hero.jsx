@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Typewriter from "./ui/TypeWriter";
 
@@ -14,11 +13,6 @@ const Hero = () => {
   ];
   return (
     <>
-      <meta
-        name="description"
-        content="About: Jagan Reddy. Illustrator: Hero Image of Jagan Reddy. Description: A creative and professional hero image showcasing Jagan Reddy's skills and personality."
-      />
-
       <section className="flex flex-col md:flex-row mt-20 mx-20 items-center justify-center gap-10">
         {/* Left - Profile */}
         <div className="flex flex-col items-center">

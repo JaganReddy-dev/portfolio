@@ -1,4 +1,3 @@
-import React from "react";
 import ProfessionalCard from "./ui/ProfessionalCard";
 
 const ProfessionalLinks = () => {
