@@ -1,72 +1,86 @@
-const Contact = () => {
-  return (
-    <section id="contact" className="max-w-2xl mx-auto px-6 py-12 ">
-      <div className="bg-white shadow-2xl inset-shadow-sm dark:bg-gray-800 rounded-2xl p-8">
-        <h1 className="text-3xl font-bold text-center text-black dark:text-white mb-8">
-          Contact Me
-        </h1>
+"use client";
 
-        <form className="space-y-6">
-          <div className="space-y-2">
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Name
-            </label>
-            <input
-              type="text"
+import FormField from "./ui/FormField";
+import SuccessDialog from "./ui/SuccessDialog";
+import useContactForm from "../hooks/useContactForm";
+
+const Contact = () => {
+  const {
+    formData,
+    validationErrors,
+    showSuccessDialog,
+    isSubmitting,
+    handleInputChange,
+    submitForm,
+    setShowSuccessDialog,
+  } = useContactForm();
+
+  return (
+    <>
+      <section id="contact" className="max-w-2xl mx-auto px-6 py-12">
+        <div className="bg-white shadow-2xl dark:bg-gray-800 rounded-2xl p-8">
+          <h1 className="text-3xl font-bold text-center text-black dark:text-white mb-8">
+            Contact Me
+          </h1>
+
+          <div className="space-y-6">
+            <FormField
               id="name"
               name="name"
-              required
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+              label="Name"
               placeholder="Your full name"
+              value={formData.name}
+              error={validationErrors.name}
+              onChange={(e) => handleInputChange("name", e.target.value)}
+              showSuccess={true}
             />
-          </div>
 
-          <div className="space-y-2">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Email
-            </label>
-            <input
+            <FormField
               type="email"
               id="email"
               name="email"
-              required
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+              label="Email"
               placeholder="your.email@example.com"
+              value={formData.email}
+              error={validationErrors.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              showSuccess={true}
             />
-          </div>
 
-          <div className="space-y-2">
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Message
-            </label>
-            <textarea
+            <FormField
+              type="textarea"
               id="message"
               name="message"
-              required
-              rows={5}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-vertical transition-colors duration-200"
+              label="Message"
               placeholder="Your message here..."
-            ></textarea>
-          </div>
+              value={formData.message}
+              error={validationErrors.message}
+              onChange={(e) => handleInputChange("message", e.target.value)}
+              rows={5}
+              showSuccess={true}
+            />
 
-          <button
-            type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-700 hover:cursor-pointer text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-          >
-            Send Message
-          </button>
-        </form>
-      </div>
-    </section>
+            <button
+              type="button"
+              onClick={submitForm}
+              disabled={isSubmitting}
+              className={`w-full font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed text-white"
+                  : "bg-blue-500 hover:bg-blue-700 hover:cursor-pointer text-white"
+              }`}
+            >
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <SuccessDialog
+        isVisible={showSuccessDialog}
+        onClose={() => setShowSuccessDialog(false)}
+      />
+    </>
   );
 };
 
