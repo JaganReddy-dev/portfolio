@@ -23,11 +23,9 @@ const Typewriter = ({ tech }) => {
 
   return (
     <div className="relative">
-      {/* Invisible text to reserve space */}
       <p className="text-lg font-mono invisible" aria-hidden="true">
         {fullText}
       </p>
-      {/* Visible typewriter text positioned absolutely */}
       <p className="text-lg font-mono absolute top-0 left-0">
         {displayed}
         {cursor && <span className="animate-pulse">|</span>}

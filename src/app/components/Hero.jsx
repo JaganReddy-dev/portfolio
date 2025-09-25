@@ -34,7 +34,7 @@ const Hero = () => {
         {/* Right - About */}
         <div className="md:w-1/2">
           <p className="text-lg leading-relaxed">
-            I am a software engineer with with a Master's degree and AWS
+            I am a software engineer with a Master's degree in ITM and AWS
             certification, passionate about web development and creating
             innovative solutions. I specialize in building interactive and
             user-friendly web applications.
@@ -42,7 +42,6 @@ const Hero = () => {
             <br />
             <span className="">My primary tools of choice Includes:</span>
           </p>
-          {/* Fixed container with minimum height to prevent layout shift */}
           <div className="min-h-[2rem] mt-2">
             <Typewriter tech={tech} />
           </div>
