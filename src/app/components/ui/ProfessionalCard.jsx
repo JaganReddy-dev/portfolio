@@ -8,7 +8,7 @@ const ProfessionalCard = ({ link, src, projectName }) => {
       target="_blank"
       rel="noopener noreferrer"
       className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
-      rounded-2xl p-3 shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 md:hover:scale-120 w-full 
+      rounded-2xl p-3 shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 md:hover:scale-115 w-full 
       max-w-sm mx-5 hover:cursor-pointer md:flex-shrink-1 md:w-1/3 md:max-w-xs"
     >
       <div className="flex flex-col items-center text-center space-y-6">

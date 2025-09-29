@@ -3,7 +3,9 @@ import ProfessionalCard from "./ui/ProfessionalCard";
 const ProfessionalLinks = () => {
   return (
     <section id="socials" className="flex my-20 flex-col">
-      <h1 className="text-4xl font-sans text-center mb-3">Find me on!</h1>
+      <h1 className="text-4xl font-sans text-center mb-3 font-bold">
+        Find me on!
+      </h1>
       <div className="flex md:flex-row items-center flex-col w-full justify-center gap-5 mt-5">
         <ProfessionalCard
           projectName="LinkedIn"
