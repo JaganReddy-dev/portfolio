@@ -2,7 +2,7 @@ const DesktopMenu = ({ links, textColorClass, onLinkClick }) => {
   return (
     <ul className="hidden md:flex gap-8">
       {links.map((link) => (
-        <li key={link.href}>
+        <li key={link.href} trackify-button={link.label}>
           <a
             href={link.href}
             onClick={(e) => onLinkClick(e, link.href)}

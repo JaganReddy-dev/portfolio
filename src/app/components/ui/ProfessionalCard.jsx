@@ -5,6 +5,8 @@ const ProfessionalCard = ({ link, src, projectName }) => {
   return (
     <Link
       href={link}
+      trackify-button={projectName}
+      trackify-navigate={link}
       target="_blank"
       rel="noopener noreferrer"
       className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
