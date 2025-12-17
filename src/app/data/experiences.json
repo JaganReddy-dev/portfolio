@@ -1,0 +1,26 @@
+{
+  "details": [
+    {
+      "id": 1,
+      "company": "Octahedron",
+      "role": "Junior Full Stack Developer",
+      "duration": "Feb 2024 – Present",
+      "responsibilies": [
+        "Built scalable ELT pipelines orchestrating Node.js ingestion and Python (Pandas) transformations on Snowflake, processing 50K+ daily records, reducing manual processing time by 70%.",
+        "Leveraged Snowflake as a data warehouse to support flexible schema design, optimizedquerying, and efficient data replication for analytics workloads.",
+        "Integrated AI-based anomaly detection to identify data inconsistencies and improve data quality."
+      ]
+    },
+    {
+      "id": 2,
+      "company": "Virtusa",
+      "role": "Junior Developer",
+      "duration": "June 2022- May 2023",
+      "responsibilies": [
+        "Developed Node.js backend with Express and Prisma ORM to process real-time analytics events, leveraging PostgreSQL for persistent storage and Redis for caching frequently accessed data.",
+        "Implemented asynchronous event processing using AWS SQS to handle high-volume analytics ingestion, decoupling data capture from storage operations.",
+        "Built geolocation enrichment pipeline combining browser Geolocation API, Google Geocoding API, and IP-based lookup with Redis caching to reduce API costs by 60%"
+      ]
+    }
+  ]
+}

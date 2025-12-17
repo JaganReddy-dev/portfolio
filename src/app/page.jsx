@@ -4,12 +4,14 @@ import ProfessionalLinks from "./components/ProfessionalLinks";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Projects from "./components/Projects";
+import Experience from "./components/Experience";
 
 const page = () => {
   return (
     <div>
       <NavBar />
       <Hero />
+      <Experience />
       <Projects />
       <ProfessionalLinks />
       <Contact />
