@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
 const ProfessionalCard = ({ link, src, projectName }) => {
   return (
@@ -29,7 +29,7 @@ const ProfessionalCard = ({ link, src, projectName }) => {
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
-export default ProfessionalCard;
+export default ProfessionalCard

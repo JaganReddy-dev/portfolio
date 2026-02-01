@@ -1,0 +1,181 @@
+{
+  "details": [
+    {
+      "id": "url-shortener",
+      "title": "URL Shortener",
+      "repoName": "url_shortner",
+      "repoUrl": "https://github.com/JaganReddy-dev/url_shortner",
+      "summary": "A FastAPI + MongoDB URL shortener with Base62 encoding, user auth, and API key management.",
+      "description": "A full-stack URL shortening service built with FastAPI and MongoDB. Users sign up, generate personal API keys, then submit long URLs to receive compact short paths via Base62 encoding with obfuscation. Each shortened URL is tied to a user account, and the API exposes endpoints for signup, login, API key creation, short-URL generation, and retrieving all URLs for a given user. Passwords are secured with Argon2id hashing.",
+      "features": [
+        "Base62 encoding with obfuscation for short URL generation",
+        "User signup / login with Argon2id password hashing",
+        "Per-user API key creation and validation",
+        "Full CRUD — create short URLs and retrieve all mappings per user",
+        "Async MongoDB via AsyncMongoClient for non-blocking I/O"
+      ],
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/auth/signup",
+          "desc": "Register a new user"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/login",
+          "desc": "Authenticate user"
+        },
+        {
+          "method": "POST",
+          "path": "/api_key/new",
+          "desc": "Generate an API key"
+        },
+        {
+          "method": "POST",
+          "path": "/short_url/new",
+          "desc": "Create a short URL"
+        },
+        {
+          "method": "GET",
+          "path": "/users/{id}/urls",
+          "desc": "Fetch user's URL map"
+        }
+      ],
+      "tags": [
+        "Python",
+        "FastAPI",
+        "MongoDB",
+        "Pydantic",
+        "Uvicorn",
+        "Argon2id"
+      ],
+      "icon": "🔗",
+      "accentFrom": "#3b82f6",
+      "accentTo": "#06b6d4"
+    },
+    {
+      "id": "pyauth",
+      "title": "PyAuth",
+      "repoName": "PyAuth",
+      "repoUrl": "https://github.com/JaganReddy-dev/PyAuth",
+      "summary": "A FastAPI authentication service with JWT tokens, refresh-token rotation, and secure token management.",
+      "description": "PyAuth is a modular, production-oriented authentication backend. It issues short-lived JWTs (5-min expiry) paired with long-lived refresh tokens (configurable via env vars). Refresh tokens are hashed with a dedicated secret before storage and can be explicitly revoked. The project follows a clean layered architecture: APIs → Services → Utils, with fully separated Pydantic request/response models for every endpoint.",
+      "features": [
+        "JWT creation and verification with configurable claims (sub, iss, aud, iat, exp)",
+        "Refresh token generation, rotation on use, and explicit revocation",
+        "Clean layered architecture — APIs / Services / Utils",
+        "Fully typed Pydantic request and response models",
+        "Environment-driven secret management with runtime validation"
+      ],
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/tokens/create",
+          "desc": "Issue JWT + refresh token"
+        },
+        {
+          "method": "POST",
+          "path": "/tokens/verify",
+          "desc": "Validate a JWT"
+        },
+        {
+          "method": "POST",
+          "path": "/tokens/refresh",
+          "desc": "Rotate tokens via refresh token"
+        },
+        {
+          "method": "DELETE",
+          "path": "/tokens/revoke",
+          "desc": "Revoke a refresh token"
+        }
+      ],
+      "tags": ["Python", "FastAPI", "Pydantic", "PyJWT", "Uvicorn"],
+      "icon": "🛡️",
+      "accentFrom": "#8b5cf6",
+      "accentTo": "#a78bfa"
+    },
+    {
+      "id": "pyauthui",
+      "title": "PyAuth UI",
+      "repoName": "PyAuthUI",
+      "repoUrl": "https://github.com/JaganReddy-dev/PyAuthUI",
+      "summary": "The Next.js + TypeScript frontend for PyAuth — login, registration, and dashboard screens.",
+      "description": "PyAuthUI is the client-side companion to PyAuth. Built with Next.js 15 and TypeScript, it provides the login and registration pages that talk to the PyAuth FastAPI backend. It handles JWT storage, automatic token refresh on expiry, and route-level auth guards. The project uses Tailwind CSS for styling and pnpm workspaces for dependency management.",
+      "features": [
+        "Login & registration forms wired to PyAuth API endpoints",
+        "Client-side JWT handling with automatic refresh-token rotation",
+        "Route-level authentication guards for protected pages",
+        "Next.js App Router with server and client components",
+        "Tailwind CSS theming with pnpm workspace setup"
+      ],
+      "endpoints": [],
+      "tags": ["TypeScript", "TailwindCSS", "Next.js", "React", "pnpm"],
+      "icon": "🖥️",
+      "accentFrom": "#10b981",
+      "accentTo": "#34d399"
+    },
+    {
+      "id": "oauth",
+      "title": "OAuth",
+      "repoName": "OAuth",
+      "repoUrl": "https://github.com/JaganReddy-dev/OAuth",
+      "summary": "A Fastify-based Node.js server implementing the Google OAuth 2.0 authorization code flow.",
+      "description": "OAuth is a Node.js server built on Fastify that handles Google OAuth 2.0 sign-in. It exposes versioned API routes under /api/v1 and keeps provider logic separated in a dedicated utils layer. The flow covers constructing the Google authorization URL, handling the redirect callback, exchanging the authorization code for access tokens, and fetching the authenticated user's profile — all wired together with clean route handlers.",
+      "features": [
+        "Google OAuth 2.0 full authorization code flow end-to-end",
+        "Versioned API structure (api/v1) for forward compatibility",
+        "Utility layer isolates provider-specific token exchange logic",
+        "Fetches authenticated user profile after successful handshake",
+        "Fastify plugin architecture keeps routes modular and testable"
+      ],
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/v1/auth/google",
+          "desc": "Initiate Google OAuth"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/auth/callback",
+          "desc": "Handle redirect & exchange code"
+        }
+      ],
+      "tags": ["Fastify", "Node.js", "Google OAuth"],
+      "icon": "🔐",
+      "accentFrom": "#f59e0b",
+      "accentTo": "#fbbf24"
+    },
+    {
+      "id": "analytics-backend",
+      "title": "Analytics Backend",
+      "repoName": "analytics-backend",
+      "repoUrl": "https://github.com/JaganReddy-dev/analytics-backend",
+      "summary": "An Express.js analytics ingestion service with Prisma ORM, request caching, background jobs, and geo-location.",
+      "description": "A backend service for collecting and processing analytics events. Built with Express.js, it ingests tracking payloads via a dedicated collection route, validates them with Zod schemas, persists data through Prisma, and resolves visitor geo-location via an external service. The architecture is split into layers — routes, schemas, services, middleware, cache, and background jobs — with OpenAPI specs and Docker support baked in from the start.",
+      "features": [
+        "Analytics event ingestion via /routes/collect endpoint",
+        "Zod schema validation on every incoming payload",
+        "Prisma ORM for type-safe database access and migrations",
+        "Request-level caching layer to reduce redundant DB hits",
+        "Background jobs for async event processing and aggregation",
+        "Geo-location service resolves visitor location from IP"
+      ],
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/collect/event",
+          "desc": "Ingest a single analytics event"
+        },
+        {
+          "method": "POST",
+          "path": "/collect/batch",
+          "desc": "Ingest a batch of events"
+        }
+      ],
+      "tags": ["JavaScript", "Express.js", "Prisma", "Zod", "yarn", "Docker"],
+      "icon": "📊",
+      "accentFrom": "#ec4899",
+      "accentTo": "#f472b6"
+    }
+  ]
+}
