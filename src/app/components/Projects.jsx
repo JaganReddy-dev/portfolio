@@ -3,7 +3,7 @@ import ProjectCard from "../components/cards/ProjectCard"
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative w-full py-12 px-4">
+    <section id="projects" className="relative w-full py-12 md:py-20  px-4">
       {/* Subtle ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"

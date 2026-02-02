@@ -2,7 +2,10 @@ import experiences from "../data/experiences.json"
 
 const Experience = () => {
   return (
-    <section id="experience" className="relative py-24 bg-black px-4 -mt-5">
+    <section
+      id="experience"
+      className="relative py-12 md:py-20 bg-black px-4 -mt-5"
+    >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl md:text-5xl font-semibold text-indigo-500 text-start uppercase tracking-widest">
           Experience

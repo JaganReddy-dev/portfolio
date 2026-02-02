@@ -17,12 +17,12 @@ const Contact = () => {
 
   return (
     <>
-      <section id="contact" className="relative py-24 px-6">
+      <section id="contact" className="relative py-12 md:py-20  px-6">
         {/* Content wrapper */}
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white">Connect</h1>
+            <h1 className="text-4xl font-bold text-white">Contact Me</h1>
             <p className="mt-3 text-gray-400">Let’s build something together</p>
           </div>
 

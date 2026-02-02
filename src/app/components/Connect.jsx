@@ -2,13 +2,16 @@ import ConnectCard from "./cards/ConnectCard"
 
 const Connect = () => {
   return (
-    <section id="connect" className="flex py-20 mb-30 flex-col">
-      <h1 className="text-4xl font-semibold text-indigo-400 uppercase tracking-widest text-center">
-        Connect
-      </h1>
-      <h2 className="text-3xl font-medium text-white leading-tight mb-10 text-center">
-        Find me around <span className="text-indigo-400">The Web</span>
-      </h2>
+    <section id="connect" className="flex py-12 md:py-20 flex-col">
+      <div className="gap-10">
+        <h1 className="text-4xl font-semibold text-indigo-400 uppercase tracking-widest text-center">
+          Connect
+        </h1>
+        <h2 className="text-3xl font-medium text-white leading-tight mb-10 text-center">
+          Find me around <span className="text-indigo-400">The Web</span>
+        </h2>
+      </div>
+
       <div className="flex md:flex-row items-center flex-col w-full justify-center gap-5 mt-5">
         <ConnectCard
           socialName="LinkedIn"
