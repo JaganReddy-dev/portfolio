@@ -3,7 +3,7 @@ import ProjectCard from "../components/cards/ProjectCard"
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative w-full py-24 px-4">
+    <section id="projects" className="relative w-full py-12 px-4">
       {/* Subtle ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -17,8 +17,8 @@ export default function Projects() {
         {/* Section header */}
         <div className="mb-14">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-px bg-indigo-500" />
-            <span className="text-xs font-semibold text-indigo-400 uppercase tracking-widest">
+            {/* <div className="w-7 h-px bg-indigo-500" /> */}
+            <span className="text-3xl font-semibold text-indigo-400 uppercase tracking-widest">
               Projects
             </span>
           </div>

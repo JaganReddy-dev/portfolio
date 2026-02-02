@@ -1,20 +1,22 @@
-const MobileMenu = ({ links, isMenuOpen, isScrolled, onLinkClick }) => {
+const MobileMenu = ({ links, isMenuOpen, onLinkClick }) => {
   return (
     <section
-      className={`fixed top-12 border-collapse border-t-0 right-0 w-full shadow-2xl md:w-1/4 h-full z-30 backdrop-filter backdrop-blur-sm bg-white text-black dark:bg-white/60 dark:text-black transform transition-transform duration-300 ease-in-out ${
-        isMenuOpen ? "translate-x-0" : "translate-x-full"
-      } ${
-        isMenuOpen && isScrolled ? "md:translate-x-0" : "md:translate-x-full"
-      }`}
-      aria-label="Menu Options"
+      className={`
+        fixed inset-0 z-20 bg-black/80 backdrop-blur-md
+        transition-opacity duration-300
+        ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+      `}
     >
-      <ul className={`flex flex-col items-center justify-center h-full gap-8 `}>
+      <ul className="flex flex-col items-center justify-center h-full gap-10">
         {links.map((link) => (
-          <li key={link.href} trackify-button={link.label}>
+          <li key={link.href}>
             <a
               href={link.href}
               onClick={(e) => onLinkClick(e, link.href)}
-              className="text-2xl font-serif hover:text-cyan-950 hover:text-3xl duration-200 cursor-pointer"
+              className="
+                text-2xl font-semibold text-white
+                hover:text-blue-400 transition-colors
+              "
             >
               {link.label}
             </a>
@@ -22,7 +24,7 @@ const MobileMenu = ({ links, isMenuOpen, isScrolled, onLinkClick }) => {
         ))}
       </ul>
     </section>
-  );
-};
+  )
+}
 
-export default MobileMenu;
+export default MobileMenu

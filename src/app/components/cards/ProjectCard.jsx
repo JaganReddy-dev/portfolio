@@ -36,7 +36,7 @@ const ProjectCard = ({ project }) => {
       {/* ── Header (always visible, clickable) ── */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-4 p-5 text-left focus:outline-none"
+        className="w-full flex items-center gap-4 p-5 text-left focus:outline-none hover:cursor-pointer"
         aria-expanded={open}
       >
         {/* Icon pill */}
