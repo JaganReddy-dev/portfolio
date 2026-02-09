@@ -18,7 +18,7 @@ export const metadata = {
     template: "%s | Jagan Reddy",
   },
   description:
-    "Full Stack Developer building production-ready web apps, auth systems & APIs with React, Next.js, FastAPI, Node.js, AWS. View my projects & experience.",
+    "Full Stack Developer building production-ready web apps, View my projects & experience.",
 
   authors: [{ name: "Jagan Reddy" }],
   creator: "Jagan Reddy",
@@ -28,17 +28,17 @@ export const metadata = {
   openGraph: {
     title: "Jagan Reddy | Full Stack Developer",
     description:
-      "Building production-ready authentication systems, data pipelines & scalable APIs. React • Next.js • FastAPI • Node.js • AWS. Check out my work.",
+      "Building production-ready auth systems, data pipelines & scalable APIs. Check out my work here.",
     url: "https://jaganreddy.vercel.app",
     siteName: "Jagan Reddy Portfolio",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://jaganreddy.vercel.app/og-image.png",
+        url: "https://jaganreddy.vercel.app/Hero.png",
         width: 1200,
         height: 630,
-        alt: "Jagan Reddy – Full Stack Developer specializing in web applications and APIs",
+        alt: "Image of Jagan Reddy",
       },
     ],
   },
@@ -47,9 +47,9 @@ export const metadata = {
     card: "summary_large_image",
     title: "Jagan Reddy | Full Stack Developer",
     description:
-      "Building auth systems, data pipelines & APIs that scale. React • FastAPI • Node.js • AWS. Full Stack Developer ready to ship.",
-    images: ["https://jaganreddy.vercel.app/og-image.png"],
-    creator: "@jaganreddy", // Add your Twitter handle if you have one
+      "Building auth systems, data pipelines & APIs that scale. I'm a Full Stack Developer ready to ship.",
+    images: ["https://jaganreddy.vercel.app/Hero.png"],
+    creator: "@jaganreddy",
   },
 
   robots: {
