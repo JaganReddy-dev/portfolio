@@ -15,7 +15,10 @@ const Hero = () => {
   ]
 
   return (
-    <section className="relative pt-32 pb-12 items-center justify-center">
+    <section
+      id="hero"
+      className="relative pt-32 pb-12 items-center justify-center"
+    >
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-500/10 to-transparent" />
 
       {/* Content wrapper */}
