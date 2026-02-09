@@ -14,34 +14,58 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Jagan Reddy | Software Engineer",
+    default: "Jagan Reddy | Full Stack Developer",
     template: "%s | Jagan Reddy",
   },
   description:
-    "Sofware Engineer building scalable web applications with React, Python, Node.js and AWS.",
+    "Full Stack Developer building production-ready web apps, auth systems & APIs with React, Next.js, FastAPI, Node.js, AWS. View my projects & experience.",
 
-  metadataBase: new URL("https://jaganreddy.vercel.app/"),
+  authors: [{ name: "Jagan Reddy" }],
+  creator: "Jagan Reddy",
+
+  metadataBase: new URL("https://jaganreddy.vercel.app"),
 
   openGraph: {
-    title: "Jagan Reddy | Software Engineer",
+    title: "Jagan Reddy | Full Stack Developer",
     description:
-      "Software Engineer specializing in end-to-end web applications, APIs, and system design.",
-    url: "https://jaganreddy.vercel.app/",
+      "Building production-ready authentication systems, data pipelines & scalable APIs. React • Next.js • FastAPI • Node.js • AWS. Check out my work.",
+    url: "https://jaganreddy.vercel.app",
     siteName: "Jagan Reddy Portfolio",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://jaganreddy.vercel.app/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Jagan Reddy – Software Engineer",
+        alt: "Jagan Reddy – Full Stack Developer specializing in web applications and APIs",
       },
     ],
-    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Jagan Reddy | Full Stack Developer",
+    description:
+      "Building auth systems, data pipelines & APIs that scale. React • FastAPI • Node.js • AWS. Full Stack Developer ready to ship.",
+    images: ["https://jaganreddy.vercel.app/og-image.png"],
+    creator: "@jaganreddy", // Add your Twitter handle if you have one
   },
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  alternates: {
+    canonical: "https://jaganreddy.vercel.app",
   },
 }
 
