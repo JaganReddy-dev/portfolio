@@ -14,18 +14,18 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Jagan Reddy | Full-Stack Developer",
+    default: "Jagan Reddy | Software Engineer",
     template: "%s | Jagan Reddy",
   },
   description:
-    "Full-stack developer building scalable web applications with React, Python, Node.js and AWS.",
+    "Sofware Engineer building scalable web applications with React, Python, Node.js and AWS.",
 
   metadataBase: new URL("https://jaganreddy.vercel.app/"),
 
   openGraph: {
-    title: "Jagan Reddy | Full-Stack Developer",
+    title: "Jagan Reddy | Software Engineer",
     description:
-      "Full-stack developer specializing in end-to-end web applications, APIs, and system design.",
+      "Software Engineer specializing in end-to-end web applications, APIs, and system design.",
     url: "https://jaganreddy.vercel.app/",
     siteName: "Jagan Reddy Portfolio",
     images: [
@@ -33,7 +33,7 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Jagan Reddy – Full-Stack Developer",
+        alt: "Jagan Reddy – Software Engineer",
       },
     ],
     type: "website",
