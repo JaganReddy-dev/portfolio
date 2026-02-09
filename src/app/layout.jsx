@@ -14,21 +14,25 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Jagan Reddy | Full Stack Developer",
-    template: "%s | Jagan Reddy",
+    default: "Jagan Reddy Portfolio",
+    template: "%s | Jagan Reddy Portfolio",
   },
   description:
-    "Full Stack Developer building production-ready web apps, View my projects & experience.",
+    "Full-stack software engineer passionate about building reliable, scalable web applications and solving real-world problems. Check out my work here.",
 
   authors: [{ name: "Jagan Reddy" }],
   creator: "Jagan Reddy",
 
   metadataBase: new URL("https://jaganreddy.vercel.app"),
 
+  generator: "Next.js",
+  applicationName: "Jagan Reddy Portfolio",
+  referrer: "origin-when-cross-origin",
+
   openGraph: {
-    title: "Jagan Reddy | Full Stack Developer",
+    title: "Jagan Reddy",
     description:
-      "Building production-ready auth systems, data pipelines & scalable APIs. Check out my work here.",
+      "Full-stack software engineer passionate about building reliable, scalable web applications and solving real-world problems. Check out my work here.",
     url: "https://jaganreddy.vercel.app",
     siteName: "Jagan Reddy Portfolio",
     locale: "en_US",
@@ -38,7 +42,8 @@ export const metadata = {
         url: "/Website.png",
         width: 1200,
         height: 630,
-        alt: "Image of Jagan Reddy",
+        alt: "Image of Website homepage showing Jagan Reddy's portfolio",
+        type: "image/png",
       },
     ],
   },
@@ -47,7 +52,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Jagan Reddy | Full Stack Developer",
     description:
-      "Building auth systems, data pipelines & APIs that scale. I'm a Full Stack Developer ready to ship.",
+      "Full-stack software engineer passionate about building reliable, scalable web applications and solving real-world problems. Check out my work here.",
     images: ["/Website.png"],
     creator: "@jaganreddy",
   },
