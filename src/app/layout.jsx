@@ -35,7 +35,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://jaganreddy.vercel.app/Hero.png",
+        url: "/Website.png",
         width: 1200,
         height: 630,
         alt: "Image of Jagan Reddy",
@@ -48,7 +48,7 @@ export const metadata = {
     title: "Jagan Reddy | Full Stack Developer",
     description:
       "Building auth systems, data pipelines & APIs that scale. I'm a Full Stack Developer ready to ship.",
-    images: ["https://jaganreddy.vercel.app/Hero.png"],
+    images: ["/Website.png"],
     creator: "@jaganreddy",
   },
 
