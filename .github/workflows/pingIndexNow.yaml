@@ -1,0 +1,16 @@
+name: Ping IndexNow after deploy
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    pingIndexNow:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Ping IndexNow API
+              run: |
+                  echo "Pinging IndexNow for portfolio..."
+                  curl -s https://jaganreddy.vercel.app/api/indexNow
