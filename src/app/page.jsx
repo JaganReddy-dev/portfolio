@@ -9,7 +9,7 @@ import ScrollToTop from "./components/buttons/ScrollToTop"
 
 const page = () => {
   return (
-    <div>
+    <div className="bg-gradient-to-b from-blue-700/10 to-transparent">
       <NavBar />
       <Hero />
       <Experience />

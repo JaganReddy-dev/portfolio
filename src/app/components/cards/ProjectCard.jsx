@@ -21,25 +21,22 @@ function AnimateHeight({ open, children }) {
     </div>
   )
 }
-const ProjectCard = ({ project }) => {
-  const [open, setOpen] = useState(false)
 
+const ProjectCard = ({ project, isExpanded, onToggle }) => {
   return (
     <div
       className="group relative rounded-xl border border-gray-800 bg-gray-900 transition-all duration-300 hover:border-gray-600"
       style={{
-        boxShadow: open
+        boxShadow: isExpanded
           ? `0 0 0 1px ${project.accentFrom}33, 0 4px 32px ${project.accentFrom}18`
           : "none",
       }}
     >
-      {/* ── Header (always visible, clickable) ── */}
       <button
-        onClick={() => setOpen(!open)}
+        onClick={onToggle}
         className="w-full flex items-center gap-4 p-5 text-left focus:outline-none hover:cursor-pointer"
-        aria-expanded={open}
+        aria-expanded={isExpanded}
       >
-        {/* Icon pill */}
         <div
           className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl transition-transform duration-300 group-hover:scale-105"
           style={{
@@ -50,7 +47,6 @@ const ProjectCard = ({ project }) => {
           {project.icon}
         </div>
 
-        {/* Title + summary */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2.5 flex-wrap">
             <h3 className="text-base font-semibold text-gray-100">
@@ -72,11 +68,10 @@ const ProjectCard = ({ project }) => {
           </p>
         </div>
 
-        {/* Chevron */}
         <div
           className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border border-gray-700 bg-gray-800 transition-all duration-300 group-hover:border-gray-600"
           style={{
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
             transition:
               "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s",
           }}
@@ -93,10 +88,8 @@ const ProjectCard = ({ project }) => {
         </div>
       </button>
 
-      {/* ── Expandable Body ── */}
-      <AnimateHeight open={open}>
+      <AnimateHeight open={isExpanded}>
         <div className="px-5 pb-5 pt-0">
-          {/* Divider */}
           <div
             className="h-px mb-5"
             style={{
@@ -104,12 +97,10 @@ const ProjectCard = ({ project }) => {
             }}
           />
 
-          {/* Description */}
           <p className="text-sm text-gray-400 leading-relaxed mb-5">
             {project.description}
           </p>
 
-          {/* Features */}
           <div className="mb-5">
             <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2.5">
               Key Features
@@ -150,7 +141,6 @@ const ProjectCard = ({ project }) => {
             </div>
           </div>
 
-          {/* API Endpoints (only if present) */}
           {project.endpoints.length > 0 && (
             <div className="mb-5">
               <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2.5">
@@ -195,7 +185,6 @@ const ProjectCard = ({ project }) => {
             </div>
           )}
 
-          {/* Tags + GitHub link row */}
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
@@ -207,8 +196,6 @@ const ProjectCard = ({ project }) => {
                 </span>
               ))}
             </div>
-
-            {/* GitHub link */}
             <a
               href={project.repoUrl}
               target="_blank"

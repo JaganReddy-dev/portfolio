@@ -19,7 +19,7 @@ const Hero = () => {
       id="hero"
       className="relative pt-32 pb-12 items-center justify-center"
     >
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blue-500/10 to-transparent" />
+      <div className="absolute inset-0 -z-10 " />
 
       {/* Content wrapper */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">

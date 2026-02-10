@@ -51,11 +51,18 @@ const NavBar = () => {
           </Link>
 
           <div className="flex items-center gap-6">
-            <DesktopMenu links={navLinks} onLinkClick={handleSmoothScroll} />
-            <HamburgerButton
-              isMenuOpen={isMenuOpen}
-              onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
-            />
+            {/* Show DesktopMenu only when not scrolled */}
+            {!isScrolled && (
+              <DesktopMenu links={navLinks} onLinkClick={handleSmoothScroll} />
+            )}
+
+            {/* Show HamburgerButton only when scrolled */}
+            {isScrolled && (
+              <HamburgerButton
+                isMenuOpen={isMenuOpen}
+                onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
+              />
+            )}
           </div>
         </nav>
       </header>
