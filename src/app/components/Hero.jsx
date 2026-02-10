@@ -34,6 +34,7 @@ const Hero = () => {
                 sizes="100%"
                 className="object-cover"
                 priority
+                fetchPriority="high"
               />
             </div>
             <p className="mt-4 text-sm text-gray-400 text-center">
