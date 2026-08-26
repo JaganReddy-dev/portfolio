@@ -48,10 +48,91 @@ const waitForFonts = async (font) => {
   await document.fonts.ready
 }
 
+// Greedy word-wrap for a single paragraph (no manual breaks inside it):
+// breaks into lines that each fit within maxWidth at the given font. Long
+// single words that still don't fit are kept as their own line (no hard
+// hyphenation).
+const wrapParagraph = (ctx, text, maxWidth) => {
+  const words = String(text || " ")
+    .split(/\s+/)
+    .filter(Boolean)
+  if (words.length === 0) return [" "]
+
+  const lines = []
+  let current = ""
+
+  for (const word of words) {
+    const candidate = current ? `${current} ${word}` : word
+    if (current && ctx.measureText(candidate).width > maxWidth) {
+      lines.push(current)
+      current = word
+    } else {
+      current = candidate
+    }
+  }
+  if (current) lines.push(current)
+  return lines
+}
+
+// Splits on any manual "\n" the caller put in `text` first (so the caller
+// can force an exact line count / break point), then greedy-wraps each
+// resulting paragraph independently to fit maxWidth.
+const wrapText = (ctx, font, text, maxWidth) => {
+  ctx.font = font
+  const paragraphs = String(text || " ").split("\n")
+  return paragraphs.flatMap((paragraph) =>
+    wrapParagraph(ctx, paragraph, maxWidth),
+  )
+}
+
+// Finds the largest font size (within [minSize, maxSize]) whose wrapped
+// text block fits within maxWidth x maxHeight. Width is respected exactly
+// via wrapping; height is respected by bisecting on font size, since more
+// lines appear as size grows.
+const fitFontSize = ({
+  ctx,
+  text,
+  fontWeight,
+  fontFamily,
+  maxWidth,
+  maxHeight,
+  minSize,
+  maxSize,
+  lineHeightRatio,
+}) => {
+  let lo = minSize
+  let hi = maxSize
+  let best = {
+    size: minSize,
+    lines: wrapText(
+      ctx,
+      `${fontWeight} ${minSize}px ${fontFamily}`,
+      text,
+      maxWidth,
+    ),
+  }
+
+  for (let i = 0; i < 24; i += 1) {
+    const mid = (lo + hi) / 2
+    const font = `${fontWeight} ${mid}px ${fontFamily}`
+    const lines = wrapText(ctx, font, text, maxWidth)
+    const blockHeight = lines.length * mid * lineHeightRatio
+
+    if (blockHeight <= maxHeight) {
+      best = { size: mid, lines }
+      lo = mid
+    } else {
+      hi = mid
+    }
+  }
+
+  return best
+}
+
 const ParticleText = ({
   text = "React Bits",
   particleSize = 2,
-  density = 4,
+  density = 3,
   color = "#ffffff",
   highlightColor = "#8b5cf6",
   scatter = 180,
@@ -61,10 +142,15 @@ const ParticleText = ({
   repelRadius = 120,
   idleDrift = 0.7,
   trigger = "mount",
-  fontSize = "clamp(3rem, 12vw, 8rem)",
+  fontSize = "clamp(2rem, 5vw, 4rem)",
   fontWeight = 800,
   fontFamily = "inherit",
   glow = true,
+  fillHeight = 0.9,
+  fillWidth = 0.98,
+  lineHeightRatio = 1.15,
+  minFontSize = 18,
+  maxFontSize = 900,
   className = "",
   style,
 }) => {
@@ -87,7 +173,8 @@ const ParticleText = ({
     let buildId = 0
     let gathering = false
     let gatherStart = 0
-    let reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
+    let reducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
     let width = 0
     let height = 0
     let dpr = 1
@@ -110,8 +197,14 @@ const ParticleText = ({
         if (fromScatter) {
           const angle = particle.seed * Math.PI * 2
           const distance = spread * (0.35 + particle.depth * 0.75)
-          particle.x = particle.targetX + Math.cos(angle) * distance + (particle.depth - 0.5) * spread * 0.55
-          particle.y = particle.targetY + Math.sin(angle) * distance + (particle.seed - 0.5) * spread * 0.55
+          particle.x =
+            particle.targetX +
+            Math.cos(angle) * distance +
+            (particle.depth - 0.5) * spread * 0.55
+          particle.y =
+            particle.targetY +
+            Math.sin(angle) * distance +
+            (particle.seed - 0.5) * spread * 0.55
         }
 
         particle.startX = particle.x
@@ -158,7 +251,9 @@ const ParticleText = ({
         let progress = 1
 
         if (gathering) {
-          const local = (now - gatherStart - particle.delay) / Math.max(1, reducedMotion ? 1 : gatherDuration)
+          const local =
+            (now - gatherStart - particle.delay) /
+            Math.max(1, reducedMotion ? 1 : gatherDuration)
           progress = clamp(local, 0, 1)
           const eased = easeOutCubic(progress)
           baseX = particle.startX + (particle.targetX - particle.startX) * eased
@@ -166,11 +261,22 @@ const ParticleText = ({
           if (progress < 1) complete = false
         } else if (!reducedMotion && idleDrift > 0) {
           const driftTime = now * 0.001
-          baseX += Math.sin(driftTime * 0.9 + particle.seed * 10) * idleDrift * particle.depth
-          baseY += Math.cos(driftTime * 0.75 + particle.depth * 10) * idleDrift * particle.depth
+          baseX +=
+            Math.sin(driftTime * 0.9 + particle.seed * 10) *
+            idleDrift *
+            particle.depth
+          baseY +=
+            Math.cos(driftTime * 0.75 + particle.depth * 10) *
+            idleDrift *
+            particle.depth
         }
 
-        if (pointer.active && !reducedMotion && pointerRepel > 0 && repelRadius > 0) {
+        if (
+          pointer.active &&
+          !reducedMotion &&
+          pointerRepel > 0 &&
+          repelRadius > 0
+        ) {
           const dx = baseX - pointer.smoothX
           const dy = baseY - pointer.smoothY
           const distance = Math.hypot(dx, dy)
@@ -221,49 +327,95 @@ const ParticleText = ({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
       const computed = window.getComputedStyle(container)
-      const resolvedFamily = fontFamily === "inherit" ? computed.fontFamily || "sans-serif" : fontFamily
-      let resolvedSize = resolveFontSize(fontSize, container, fontWeight, resolvedFamily)
-      let font = `${fontWeight} ${resolvedSize}px ${resolvedFamily}`
+      const resolvedFamily =
+        fontFamily === "inherit"
+          ? computed.fontFamily || "sans-serif"
+          : fontFamily
 
-      await waitForFonts(font)
-      if (currentBuild !== buildId) return
+      // fontSize prop now only seeds the starting guess / upper bound;
+      // the real size is fit against the container's width AND height.
+      const seedSize = resolveFontSize(
+        fontSize,
+        container,
+        fontWeight,
+        resolvedFamily,
+      )
+      const maxTextWidth = Math.max(20, width * fillWidth)
+      const maxTextHeight = Math.max(20, height * fillHeight)
+      const upperBound = clamp(
+        Math.max(seedSize * 2.2, maxTextHeight * 1.4),
+        minFontSize + 1,
+        maxFontSize,
+      )
 
       const offscreen = document.createElement("canvas")
       const offCtx = offscreen.getContext("2d", { willReadFrequently: true })
       if (!offCtx) return
 
       const content = String(text || " ")
-      const maxTextWidth = width * 0.92
+
+      // Preload a representative font weight before measuring, so wrap
+      // decisions use correct glyph metrics.
+      await waitForFonts(`${fontWeight} ${seedSize}px ${resolvedFamily}`)
+      if (currentBuild !== buildId) return
+
+      const fit = fitFontSize({
+        ctx: offCtx,
+        text: content,
+        fontWeight,
+        fontFamily: resolvedFamily,
+        maxWidth: maxTextWidth,
+        maxHeight: maxTextHeight,
+        minSize: minFontSize,
+        maxSize: upperBound,
+        lineHeightRatio,
+      })
+
+      let resolvedSize = fit.size
+      let lines = fit.lines
+      let font = `${fontWeight} ${resolvedSize}px ${resolvedFamily}`
+      await waitForFonts(font)
+      if (currentBuild !== buildId) return
       offCtx.font = font
-      let metrics = offCtx.measureText(content)
-      const measuredWidth = Math.max(1, metrics.width)
-      if (measuredWidth > maxTextWidth) {
-        resolvedSize = Math.max(18, resolvedSize * (maxTextWidth / measuredWidth))
-        font = `${fontWeight} ${resolvedSize}px ${resolvedFamily}`
-        await waitForFonts(font)
-        if (currentBuild !== buildId) return
-        offCtx.font = font
-        metrics = offCtx.measureText(content)
-      }
 
-      const left = Math.ceil(metrics.actualBoundingBoxLeft || 0)
-      const right = Math.ceil(metrics.actualBoundingBoxRight || metrics.width)
-      const ascent = Math.ceil(metrics.actualBoundingBoxAscent || resolvedSize * 0.78)
-      const descent = Math.ceil(metrics.actualBoundingBoxDescent || resolvedSize * 0.22)
-      const padding = Math.max(12, Math.ceil(resolvedSize * 0.08))
-      const textWidth = Math.max(1, left + right)
-      const textHeight = Math.max(1, ascent + descent)
+      const lineHeight = resolvedSize * lineHeightRatio
+      let maxLineWidth = 0
+      const lineMetrics = lines.map((line) => {
+        const m = offCtx.measureText(line)
+        maxLineWidth = Math.max(maxLineWidth, m.width)
+        return m
+      })
 
-      offscreen.width = textWidth + padding * 2
-      offscreen.height = textHeight + padding * 2
+      const ascent = Math.ceil(resolvedSize * 0.78)
+      const descent = Math.ceil(resolvedSize * 0.22)
+      const padding = Math.max(8, Math.ceil(resolvedSize * 0.08))
+      const blockWidth = Math.max(1, Math.ceil(maxLineWidth))
+      const blockHeight = Math.max(1, Math.ceil(lines.length * lineHeight))
+
+      offscreen.width = blockWidth + padding * 2
+      offscreen.height = blockHeight + padding * 2
       offCtx.clearRect(0, 0, offscreen.width, offscreen.height)
       offCtx.font = font
-      offCtx.textAlign = "left"
+      offCtx.textAlign = "center"
       offCtx.textBaseline = "alphabetic"
       offCtx.fillStyle = "#ffffff"
-      offCtx.fillText(content, padding - left, padding + ascent)
 
-      const imageData = offCtx.getImageData(0, 0, offscreen.width, offscreen.height)
+      lines.forEach((line, index) => {
+        const baselineY =
+          padding +
+          index * lineHeight +
+          (lineHeight - lineHeight) / 2 +
+          ascent +
+          (lineHeight - (ascent + descent)) / 2
+        offCtx.fillText(line, offscreen.width / 2, baselineY)
+      })
+
+      const imageData = offCtx.getImageData(
+        0,
+        0,
+        offscreen.width,
+        offscreen.height,
+      )
       const targets = []
       const step = Math.max(2, Math.floor(density))
 
@@ -280,7 +432,10 @@ const ParticleText = ({
         }
       }
 
-      const maxParticles = Math.max(900, Math.min(5200, Math.floor((width * height) / 90)))
+      const maxParticles = Math.max(
+        900,
+        Math.min(5200, Math.floor((width * height) / 90)),
+      )
       const stride = Math.max(1, Math.ceil(targets.length / maxParticles))
       const baseRgb = hexToRgb(color)
       const highlightRgb = hexToRgb(highlightColor)
@@ -289,12 +444,20 @@ const ParticleText = ({
       particles = selected.map((target, index) => {
         const seed = ((index * 9301 + 49297) % 233280) / 233280
         const depth = 0.45 + (((index * 233 + 97) % 1000) / 1000) * 0.9
-        const blend = baseRgb && highlightRgb ? clamp(target.x / Math.max(1, width) + (seed - 0.5) * 0.35, 0, 1) : 0
-        const particleColor = baseRgb && highlightRgb ? rgbToCss(mixRgb(baseRgb, highlightRgb, blend)) : color
+        const blend =
+          baseRgb && highlightRgb
+            ? clamp(target.x / Math.max(1, width) + (seed - 0.5) * 0.35, 0, 1)
+            : 0
+        const particleColor =
+          baseRgb && highlightRgb
+            ? rgbToCss(mixRgb(baseRgb, highlightRgb, blend))
+            : color
         const angle = seed * Math.PI * 2
         const distance = (reducedMotion ? 0 : scatter) * (0.35 + depth * 0.75)
-        const startX = target.x + Math.cos(angle) * distance + (seed - 0.5) * scatter * 0.45
-        const startY = target.y + Math.sin(angle) * distance + (depth - 0.9) * scatter * 0.45
+        const startX =
+          target.x + Math.cos(angle) * distance + (seed - 0.5) * scatter * 0.45
+        const startY =
+          target.y + Math.sin(angle) * distance + (depth - 0.9) * scatter * 0.45
 
         return {
           x: reducedMotion ? target.x : startX,
@@ -357,7 +520,9 @@ const ParticleText = ({
       if (trigger === "click") startGather(true)
     }
 
-    const reduceMotionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)")
+    const reduceMotionQuery = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    )
     const handleReduceMotionChange = (event) => {
       reducedMotion = event.matches
       sampleText()
@@ -402,16 +567,25 @@ const ParticleText = ({
     fontWeight,
     fontFamily,
     glow,
+    fillHeight,
+    fillWidth,
+    lineHeightRatio,
+    minFontSize,
+    maxFontSize,
   ])
 
   return (
     <div
       ref={containerRef}
-      className={`relative block h-full min-h-[240px] w-full overflow-hidden touch-none ${className}`}
+      className={`relative block h-full min-h-60 w-full overflow-hidden touch-none ${className}`}
       style={style}
       aria-label={text}
     >
-      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" aria-hidden="true" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 block h-full w-full"
+        aria-hidden="true"
+      />
       <span className="sr-only">{text}</span>
     </div>
   )

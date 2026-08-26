@@ -26,6 +26,34 @@ const Hero = () => {
 
       {/* Content wrapper */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Heading formed from gathering particles (ParticleText),
+            replacing the old masked-heading reveal entirely. Full width
+            here (not squeezed into the photo/text column below) so it has
+            room to render at a readable size. */}
+        <div className="h-56 sm:h-64 md:h-80 lg:h-96 w-full mb-8">
+          <h1 className="h-full w-full m-0">
+            <ParticleText
+              text={"Building scalable & \n performant web apps"}
+              fillHeight={0.92}
+              fillWidth={0.95}
+              fontWeight={700}
+              fontFamily="inherit"
+              color="#c7d2fe"
+              highlightColor="#6366f1"
+              trigger="mount"
+              density={3}
+              particleSize={2}
+              scatter={160}
+              gatherDuration={1400}
+              stagger={360}
+              pointerRepel={36}
+              repelRadius={110}
+              idleDrift={0.5}
+              glow
+            />
+          </h1>
+        </div>
+
         <div className="flex flex-col md:flex-row items-center justify-center gap-16">
           {/* Profile */}
           <div className="flex flex-col items-center">
@@ -47,42 +75,13 @@ const Hero = () => {
 
           {/* Text */}
           <div className="md:w-3/5 space-y-6 text-center md:text-left">
-            {/* Heading formed from gathering particles (ParticleText),
-                replacing the old masked-heading reveal entirely. Colors
-                tuned to the site's indigo accent so it still reads as part
-                of the same theme, and the glow uses that same accent as its
-                shadow color for a bit more prominence over the persistent
-                particle background. */}
-            <div className="h-28 sm:h-32 md:h-36 w-full">
-              <h1 className="h-full w-full m-0">
-                <ParticleText
-                  text="Building scalable, performant web applications"
-                  fontSize="clamp(1.6rem, 3.6vw, 3.25rem)"
-                  fontWeight={800}
-                  fontFamily="inherit"
-                  color="#c7d2fe"
-                  highlightColor="#6366f1"
-                  trigger="mount"
-                  density={3}
-                  particleSize={2.1}
-                  scatter={160}
-                  gatherDuration={1400}
-                  stagger={360}
-                  pointerRepel={36}
-                  repelRadius={110}
-                  idleDrift={0.5}
-                  glow
-                />
-              </h1>
-            </div>
-
             <p className="text-lg text-gray-400 max-w-xl mx-auto md:mx-0 leading-relaxed">
               I’m <span className="text-white font-medium">Jagan Reddy</span>, a
               software engineer focused on crafting clean, reliable web
               experiences using modern frontend and backend technologies.
             </p>
 
-            <div className="min-h-[2rem] text-indigo-400 font-medium">
+            <div className="min-h-8 text-indigo-400 font-medium">
               <Typewriter tech={tech} />
             </div>
 
