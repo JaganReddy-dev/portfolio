@@ -1,9 +1,21 @@
 import AccordionGallery from "./ui/reactbits/AccordionGallery"
 
 const socialLinks = [
-  { image: "/LinkedIn.png", label: "LinkedIn", link: "https://www.linkedin.com/in/jagan368/" },
-  { image: "/Medium.png", label: "Medium", link: "https://medium.com/@jagan_reddy" },
-  { image: "/GitHub.png", label: "GitHub", link: "https://github.com/JaganReddy-dev/" },
+  {
+    image: "/LinkedIn.png",
+    label: "LinkedIn",
+    link: "https://www.linkedin.com/in/jagan368/",
+  },
+  {
+    image: "/Medium.png",
+    label: "Medium",
+    link: "https://medium.com/@jagan_reddy",
+  },
+  {
+    image: "/Github.png",
+    label: "GitHub",
+    link: "https://github.com/JaganReddy-dev/",
+  },
 ]
 
 const Connect = () => {
