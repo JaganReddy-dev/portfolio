@@ -24,7 +24,6 @@ const AccordionGallery = ({
   duration = 0.6,
   ease = "power3.out",
   parallax = 0.5,
-  tilt = 8,
   stagger = 0.06,
   trigger = "hover",
   showLabels = true,
@@ -71,10 +70,10 @@ const AccordionGallery = ({
         const bar = barRefs.current[i]
         const text = textRefs.current[i]
 
-        const rot = isActive ? 0 : i < active ? tilt : -tilt
-        const rotProp = vertical ? { rotateX: -rot } : { rotateY: rot }
-
-        tl.to(panel, { flexGrow: isActive ? grow : 1, ...rotProp, duration: dur, ease }, 0)
+        // Panels stay flat/straight — no rotateX/rotateY tilt — so the
+        // gallery reads as a clean row of aligned panels rather than an
+        // angled fan.
+        tl.to(panel, { flexGrow: isActive ? grow : 1, duration: dur, ease }, 0)
 
         if (media) {
           const drift = Math.max(-1.5, Math.min(1.5, active - i))
@@ -107,7 +106,7 @@ const AccordionGallery = ({
 
       tlRef.current = tl
     },
-    [active, count, expandRatio, duration, ease, vertical, tilt, parallax, grayscale, showLabels, stagger, prefersReduced]
+    [active, count, expandRatio, duration, ease, vertical, parallax, grayscale, showLabels, stagger, prefersReduced]
   )
 
   useEffect(() => {
@@ -168,7 +167,7 @@ const AccordionGallery = ({
   return (
     <div
       ref={rootRef}
-      className={`flex ${vertical ? "flex-col" : "flex-row"} w-full max-w-full [perspective:1400px] max-[520px]:!flex-col max-[520px]:[perspective:none] ${className}`}
+      className={`flex ${vertical ? "flex-col" : "flex-row"} w-full max-w-full max-[520px]:!flex-col ${className}`}
       style={{ gap: `${gap}px`, height: vertical ? `${Math.round(height * 1.6)}px` : `${height}px` }}
       role="list"
       aria-label="Image accordion gallery"
@@ -180,7 +179,7 @@ const AccordionGallery = ({
           <Tag
             key={i}
             ref={(el) => (panelRefs.current[i] = el)}
-            className="group relative block min-w-0 min-h-0 flex-[1_1_0] cursor-pointer overflow-hidden bg-[#0a0713] no-underline outline-none [transform-style:preserve-3d] [transform-origin:center] [box-shadow:0_10px_30px_-18px_rgba(0,0,0,0.8)] focus-visible:[box-shadow:0_0_0_2px_var(--ag-accent),0_10px_30px_-18px_rgba(0,0,0,0.8)] max-[520px]:min-h-[84px] max-[520px]:!transform-none"
+            className="group relative block min-w-0 min-h-0 flex-[1_1_0] cursor-pointer overflow-hidden bg-[#0a0713] no-underline outline-none [box-shadow:0_10px_30px_-18px_rgba(0,0,0,0.8)] focus-visible:[box-shadow:0_0_0_2px_var(--ag-accent),0_10px_30px_-18px_rgba(0,0,0,0.8)] max-[520px]:min-h-[84px]"
             style={{ borderRadius: `${radius}px`, "--ag-accent": accentColor, willChange: "flex-grow, transform" }}
             href={item.link || undefined}
             target={item.link ? "_blank" : undefined}

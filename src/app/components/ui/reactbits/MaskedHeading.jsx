@@ -10,6 +10,7 @@ const MaskedHeading = ({
   mediaType = "image",
   src = "",
   poster = "",
+  gradient = "linear-gradient(135deg, #ffffff 0%, #c7d2fe 35%, #818cf8 65%, #6366f1 100%)",
   fillScale = 1.25,
   parallax = 26,
   drift = 18,
@@ -306,6 +307,8 @@ const MaskedHeading = ({
                 loop
                 playsInline
               />
+            ) : mediaType === "gradient" ? (
+              <div className="block w-full h-full" style={{ background: gradient }} />
             ) : (
               <img className="block w-full h-full object-cover select-none" src={src} alt="" draggable={false} />
             )}

@@ -24,6 +24,7 @@ const DEFAULT_ITEMS = [
 
 const LineSidebar = ({
   items = DEFAULT_ITEMS,
+  activeIndex: controlledActiveIndex,
   accentColor = "#A855F7",
   textColor = "#c4c4c4",
   markerColor = "#6c6c6c",
@@ -51,7 +52,13 @@ const LineSidebar = ({
   const lastRef = useRef(0)
   const activeRef = useRef(defaultActive)
   const smoothingRef = useRef(smoothing)
-  const [activeIndex, setActiveIndex] = useState(defaultActive)
+  const [internalActiveIndex, setInternalActiveIndex] = useState(defaultActive)
+
+  // Controlled mode: a parent doing scroll-aware active-section detection
+  // (IntersectionObserver) can drive the highlight directly. Uncontrolled
+  // mode (no activeIndex prop) keeps the original click-to-select behavior.
+  const isControlled = controlledActiveIndex !== undefined && controlledActiveIndex !== null
+  const activeIndex = isControlled ? controlledActiveIndex : internalActiveIndex
 
   activeRef.current = activeIndex
   smoothingRef.current = smoothing
@@ -118,10 +125,10 @@ const LineSidebar = ({
 
   const handleClick = useCallback(
     (index, label) => {
-      setActiveIndex(index)
+      if (!isControlled) setInternalActiveIndex(index)
       onItemClick?.(index, label)
     },
-    [onItemClick]
+    [isControlled, onItemClick]
   )
 
   useEffect(() => {

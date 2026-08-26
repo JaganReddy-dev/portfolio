@@ -1,6 +1,7 @@
 import { Inter, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
+import GlobalParticles from "./components/GlobalParticles"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -88,6 +89,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Single persistent particle canvas for the whole app — mounted
+            once here so it never restarts as sections scroll past. */}
+        <GlobalParticles />
         {children}
         <Analytics />
       </body>

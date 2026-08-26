@@ -76,19 +76,3 @@ body {
     transform: none;
   }
 }
-
-/* LineSidebar scroll-nav: fixed to the left edge on desktop, hidden on mobile
-   where the hamburger menu already covers navigation. */
-.scroll-nav {
-  position: fixed;
-  left: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 30;
-}
-
-@media (max-width: 1024px) {
-  .scroll-nav {
-    display: none;
-  }
-}

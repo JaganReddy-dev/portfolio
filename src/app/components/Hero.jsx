@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Typewriter from "./ui/TypeWriter"
-import Particles from "./ui/reactbits/Particles"
 import MaskedHeading from "./ui/reactbits/MaskedHeading"
 
 const Hero = () => {
@@ -21,21 +20,9 @@ const Hero = () => {
       id="hero"
       className="relative pt-32 pb-12 items-center justify-center overflow-hidden"
     >
-      {/* 10% accent, delivered as a sparse particle field over the 70% dominant background */}
-      <div className="absolute inset-0 -z-10 opacity-70">
-        <Particles
-          particleCount={140}
-          particleSpread={12}
-          speed={0.08}
-          particleColors={["#6366f1", "#818cf8", "#ffffff"]}
-          moveParticlesOnHover
-          particleHoverFactor={1.4}
-          alphaParticles
-          particleBaseSize={90}
-          sizeRandomness={1}
-          disableRotation={false}
-        />
-      </div>
+      {/* Background particles now live once, globally, in GlobalParticles —
+          Hero no longer mounts its own canvas so the effect is continuous
+          across the whole page instead of restarting per section. */}
 
       {/* Content wrapper */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -63,17 +50,19 @@ const Hero = () => {
             <MaskedHeading
               text="Building scalable, performant web applications"
               tag="h1"
-              src="/Hero.png"
+              mediaType="gradient"
+              gradient="linear-gradient(135deg, #ffffff 0%, #c7d2fe 30%, #a5b4fc 55%, #6366f1 100%)"
               align="center"
               reveal="rise"
               trigger="view"
               duration={1}
               stagger={0.06}
-              textScale={0.09}
-              fillScale={1.15}
-              parallax={18}
-              drift={10}
-              className="text-white md:text-left"
+              textScale={0.1}
+              weight={800}
+              fillScale={1.1}
+              parallax={16}
+              drift={8}
+              className="text-white md:text-left drop-shadow-[0_4px_30px_rgba(99,102,241,0.35)]"
               style={{ textAlign: "inherit" }}
             />
 

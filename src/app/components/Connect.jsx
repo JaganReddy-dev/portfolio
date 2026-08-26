@@ -22,7 +22,7 @@ const Connect = () => {
           defaultIndex={0}
           accentColor="#818cf8"
           height={340}
-          expandRatio={0.5}
+          expandRatio={0.74}
           trigger="hover"
           grayscale
         />

@@ -90,6 +90,7 @@ const Particles = ({
   speed = 0.1,
   particleColors,
   moveParticlesOnHover = false,
+  listenOnWindow = false,
   particleHoverFactor = 1,
   alphaParticles = false,
   particleBaseSize = 100,
@@ -104,7 +105,10 @@ const Particles = ({
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container) return
+    // Guard against a zero/negative count (used to fully disable the effect
+    // for prefers-reduced-motion) instead of asking WebGL to build an empty
+    // point cloud.
+    if (!container || particleCount <= 0) return
 
     const renderer = new Renderer({
       dpr: pixelRatio,
@@ -134,8 +138,13 @@ const Particles = ({
       mouseRef.current = { x, y }
     }
 
+    // When the container is pointer-events:none (the persistent full-page
+    // layer), a listener bound to the container itself would never fire.
+    // Binding to window instead still tracks the cursor correctly and never
+    // intercepts events meant for content above the canvas.
+    const moveTarget = listenOnWindow ? window : container
     if (moveParticlesOnHover) {
-      container.addEventListener("mousemove", handleMouseMove)
+      moveTarget.addEventListener("mousemove", handleMouseMove)
     }
 
     const count = particleCount
@@ -215,7 +224,7 @@ const Particles = ({
     return () => {
       window.removeEventListener("resize", resize)
       if (moveParticlesOnHover) {
-        container.removeEventListener("mousemove", handleMouseMove)
+        moveTarget.removeEventListener("mousemove", handleMouseMove)
       }
       cancelAnimationFrame(animationFrameId)
       if (container.contains(gl.canvas)) {
@@ -228,6 +237,7 @@ const Particles = ({
     particleSpread,
     speed,
     moveParticlesOnHover,
+    listenOnWindow,
     particleHoverFactor,
     alphaParticles,
     particleBaseSize,

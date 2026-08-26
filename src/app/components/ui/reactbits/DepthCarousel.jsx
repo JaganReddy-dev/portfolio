@@ -19,8 +19,8 @@ const DepthCarousel = ({
   visibleCards = 4,
   falloff = 0.2,
   blur = 6,
-  duration = 700,
-  ease = "power3.out",
+  duration = 450,
+  ease = "power2.out",
   autoplay = false,
   autoplayDelay = 3200,
   loop = true,
@@ -185,15 +185,27 @@ const DepthCarousel = ({
     const onWheel = (e) => {
       const cfg = cfgRef.current
       if (cfg.count < 2) return
+
+      // Root cause of the "fighting the user's scroll" complaint: this used
+      // to preventDefault() on every wheel event, including plain vertical
+      // page-scrolling, which hijacked the page whenever the cursor merely
+      // passed over the carousel. Only intentional horizontal gestures
+      // (trackpad horizontal swipe, or shift+wheel) drive the carousel now;
+      // vertical wheel input passes straight through to the page.
+      const isHorizontalIntent = Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey
+      if (!isHorizontalIntent) return
+
       e.preventDefault()
       tweenRef.current?.kill()
-      const raw = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+      const raw = e.shiftKey && e.deltaX === 0 ? e.deltaY : e.deltaX
       const delta = e.deltaMode === 1 ? raw * 24 : raw
       const step = clamp(delta / (cfg.cardWidth * 0.9), -0.6, 0.6)
       posRef.current += step
       layout(posRef.current)
       if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current)
-      wheelTimerRef.current = setTimeout(() => setFocus(Math.round(posRef.current), true), 130)
+      // Settle promptly once input stops so the carousel never lingers in a
+      // half-transitioned, half-transparent in-between frame.
+      wheelTimerRef.current = setTimeout(() => setFocus(Math.round(posRef.current), true), 90)
     }
     el.addEventListener("wheel", onWheel, { passive: false })
     return () => {
