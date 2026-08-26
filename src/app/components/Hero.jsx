@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Typewriter from "./ui/TypeWriter"
-import MaskedHeading from "./ui/reactbits/MaskedHeading"
+import ParticleText from "./ui/reactbits/ParticleText"
 
 const Hero = () => {
   const tech = [
@@ -47,24 +47,34 @@ const Hero = () => {
 
           {/* Text */}
           <div className="md:w-3/5 space-y-6 text-center md:text-left">
-            <MaskedHeading
-              text="Building scalable, performant web applications"
-              tag="h1"
-              mediaType="gradient"
-              gradient="linear-gradient(135deg, #ffffff 0%, #c7d2fe 30%, #a5b4fc 55%, #6366f1 100%)"
-              align="center"
-              reveal="rise"
-              trigger="view"
-              duration={1}
-              stagger={0.06}
-              textScale={0.1}
-              weight={800}
-              fillScale={1.1}
-              parallax={16}
-              drift={8}
-              className="text-white md:text-left drop-shadow-[0_4px_30px_rgba(99,102,241,0.35)]"
-              style={{ textAlign: "inherit" }}
-            />
+            {/* Heading formed from gathering particles (ParticleText),
+                replacing the old masked-heading reveal entirely. Colors
+                tuned to the site's indigo accent so it still reads as part
+                of the same theme, and the glow uses that same accent as its
+                shadow color for a bit more prominence over the persistent
+                particle background. */}
+            <div className="h-28 sm:h-32 md:h-36 w-full">
+              <h1 className="h-full w-full m-0">
+                <ParticleText
+                  text="Building scalable, performant web applications"
+                  fontSize="clamp(1.6rem, 3.6vw, 3.25rem)"
+                  fontWeight={800}
+                  fontFamily="inherit"
+                  color="#c7d2fe"
+                  highlightColor="#6366f1"
+                  trigger="mount"
+                  density={3}
+                  particleSize={2.1}
+                  scatter={160}
+                  gatherDuration={1400}
+                  stagger={360}
+                  pointerRepel={36}
+                  repelRadius={110}
+                  idleDrift={0.5}
+                  glow
+                />
+              </h1>
+            </div>
 
             <p className="text-lg text-gray-400 max-w-xl mx-auto md:mx-0 leading-relaxed">
               I’m <span className="text-white font-medium">Jagan Reddy</span>, a

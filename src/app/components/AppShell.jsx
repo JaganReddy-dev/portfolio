@@ -16,7 +16,7 @@ const SECTIONS = [
 const SECTION_IDS = SECTIONS.map((s) => s.id)
 const SECTION_LABELS = SECTIONS.map((s) => s.label)
 
-const AppShell = ({ children }) => {
+const AppShell = ({ children, footer }) => {
   const { activeIndex, scrollToSection } = useActiveSection(SECTION_IDS)
 
   return (
@@ -77,6 +77,18 @@ const AppShell = ({ children }) => {
           {children}
         </main>
       </div>
+
+      {/*
+        Root cause of the footer being "cut off on the left": it used to
+        render inside <main>, which sits beside the reserved sidebar gutter
+        above — so its full-bleed black background only spanned the main
+        column's width instead of the full viewport. Rendering it as a
+        sibling *after* the flex row (full width, below the sidebar) fixes
+        that at the layout level instead of patching it with overflow
+        tricks, and as a bonus the sticky sidebar naturally stops once
+        content ends instead of floating next to the footer.
+      */}
+      {footer}
     </>
   )
 }
