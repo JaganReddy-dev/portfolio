@@ -2,6 +2,7 @@
 
 import FormField from "./ui/FormField"
 import SuccessDialog from "./ui/SuccessDialog"
+import ErrorState from "./ui/states/ErrorState"
 import useContactForm from "../hooks/useContactForm"
 
 const Contact = () => {
@@ -10,9 +11,11 @@ const Contact = () => {
     validationErrors,
     showSuccessDialog,
     isSubmitting,
+    submitError,
     handleInputChange,
     submitForm,
     setShowSuccessDialog,
+    clearSubmitError,
   } = useContactForm()
 
   return (
@@ -28,6 +31,19 @@ const Contact = () => {
 
           {/* Form container */}
           <div className="rounded-2xl border border-gray-800 bg-gray-900/60 backdrop-blur-sm p-8">
+            {submitError && (
+              <div className="mb-6">
+                <ErrorState
+                  title="Message not sent"
+                  description={submitError}
+                  onRetry={() => {
+                    clearSubmitError()
+                    submitForm()
+                  }}
+                  retryLabel="Retry"
+                />
+              </div>
+            )}
             <div className="space-y-6">
               <FormField
                 id="name"
@@ -72,10 +88,10 @@ const Contact = () => {
                 type="button"
                 onClick={submitForm}
                 disabled={isSubmitting}
-                className={`w-full rounded-xl px-6 py-3 font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black ${
+                className={`w-full rounded-xl px-6 py-3 font-medium transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-black ${
                   isSubmitting
                     ? "bg-gray-600 text-white cursor-not-allowed"
-                    : "bg-blue-500 text-white hover:bg-blue-600 hover:-translate-y-0.5"
+                    : "bg-indigo-500 text-white hover:bg-indigo-600 hover:-translate-y-0.5"
                 }`}
               >
                 {isSubmitting ? "Sending..." : "Send message"}

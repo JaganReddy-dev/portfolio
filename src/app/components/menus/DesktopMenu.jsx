@@ -10,7 +10,7 @@ const DesktopMenu = ({ links, onLinkClick }) => {
               relative text-gray-300 hover:text-white
               transition-colors duration-200
               after:absolute after:left-0 after:-bottom-1
-              after:h-px after:w-0 after:bg-blue-400
+              after:h-px after:w-0 after:bg-indigo-400
               after:transition-all after:duration-300
               hover:after:w-full
             "

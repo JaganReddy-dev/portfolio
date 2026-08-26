@@ -1,0 +1,44 @@
+{
+  "details": [
+    {
+      "id": "sentinel-signup",
+      "title": "Designing a Secure Signup System (OTP + Attempt Limits)",
+      "publication": "Medium",
+      "date": "Feb 21, 2026",
+      "summary": "A walkthrough of building a hardened FastAPI signup flow, covering OTP verification and attempt-limiting to close off common account-abuse gaps.",
+      "url": "https://medium.com/@jagan_reddy/sentinel-secure-user-signup-in-fastapi-done-right-09f071d8c5d2",
+      "tags": ["Python", "FastAPI", "Security"],
+      "featured": true
+    },
+    {
+      "id": "jwt-fastapi",
+      "title": "JWT in FastAPI, the Secure Way (Refresh Tokens Explained)",
+      "publication": "Medium",
+      "date": "Jan 25, 2026",
+      "summary": "How PyAuth issues short-lived JWTs alongside rotating, hashed refresh tokens, and why that pairing holds up better than long-lived tokens alone.",
+      "url": "https://medium.com/@jagan_reddy/jwt-in-fastapi-the-secure-way-refresh-tokens-explained-f7d2d17b1d17",
+      "tags": ["Python", "FastAPI", "JWT"],
+      "featured": false
+    },
+    {
+      "id": "custom-analytics-tracker",
+      "title": "Building a Custom Analytics Tracker: Taking Back Control of Your Data",
+      "publication": "JavaScript in Plain English",
+      "date": "Oct 6, 2025",
+      "summary": "The case for rolling your own lightweight analytics pipeline instead of an off-the-shelf tool, and what that buys you in ownership and flexibility.",
+      "url": "https://medium.com/javascript-in-plain-english/building-a-custom-analytics-tracker-taking-back-control-of-your-data-0bfbf73beb2b",
+      "tags": ["JavaScript", "Node.js", "Analytics"],
+      "featured": false
+    },
+    {
+      "id": "js-temporal",
+      "title": "JavaScript's Date is Broken. Here's Why Temporal is the Future.",
+      "publication": "Medium",
+      "date": "Aug 6, 2025",
+      "summary": "An introduction to the Temporal API and how it resolves long-standing pain points in JavaScript's built-in date and time handling.",
+      "url": "https://medium.com/@jagan_reddy/javascripts-date-is-broken-heres-why-temporal-is-the-future-a9f29cb9f89e",
+      "tags": ["JavaScript", "Web APIs"],
+      "featured": false
+    }
+  ]
+}

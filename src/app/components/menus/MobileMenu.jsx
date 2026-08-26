@@ -15,7 +15,7 @@ const MobileMenu = ({ links, isMenuOpen, onLinkClick }) => {
               onClick={(e) => onLinkClick(e, link.href)}
               className="
                 text-2xl font-semibold text-white
-                hover:text-blue-400 transition-colors
+                hover:text-indigo-400 transition-colors
               "
             >
               {link.label}

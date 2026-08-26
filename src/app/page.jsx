@@ -5,14 +5,18 @@ import Contact from "./components/Contact"
 import Footer from "./components/Footer"
 import Projects from "./components/Projects"
 import Experience from "./components/Experience"
+import Articles from "./components/Articles"
+import ScrollNav from "./components/ScrollNav"
 import ScrollToTop from "./components/buttons/ScrollToTop"
 
 const page = () => {
   return (
-    <div className="bg-gradient-to-b from-blue-700/10 to-transparent">
+    <div className="bg-gradient-to-b from-indigo-700/10 to-transparent">
       <NavBar />
+      <ScrollNav />
       <Hero />
       <Experience />
+      <Articles />
       <Projects />
       <Connect />
       <Contact />

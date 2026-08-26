@@ -6,9 +6,10 @@
       "role": "Junior Full Stack Developer",
       "duration": "Feb 2024 – Present",
       "responsibilies": [
-        "Built scalable ELT pipelines orchestrating Node.js ingestion and Python (Pandas) transformations on Snowflake, processing 50K+ daily records, reducing manual processing time by 70%.",
-        "Leveraged Snowflake as a data warehouse to support flexible schema design, optimizedquerying, and efficient data replication for analytics workloads.",
-        "Integrated AI-based anomaly detection to identify data inconsistencies and improve data quality."
+        "Developed an analytics tracker and dashboard to surface user insights, built with TypeScript, Web APIs, Express.js, Node.js, React, and Chart.js.",
+        "Implemented an auth server with role-based access control (RBAC) that scales accordingly, using JWT, Python, FastAPI, and Argon2id.",
+        "Performed end-to-end tests with Playwright, and unit tests with React Testing Library and Jest.",
+        "Containerized both services with Docker and deployed them on AWS EKS."
       ]
     }
   ]

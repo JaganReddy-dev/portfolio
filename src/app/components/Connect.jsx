@@ -1,32 +1,30 @@
-import ConnectCard from "./cards/ConnectCard"
+import AccordionGallery from "./ui/reactbits/AccordionGallery"
+
+const socialLinks = [
+  { image: "/LinkedIn.png", label: "LinkedIn", link: "https://www.linkedin.com/in/jagan368/" },
+  { image: "/Medium.png", label: "Medium", link: "https://medium.com/@jagan_reddy" },
+  { image: "/GitHub.png", label: "GitHub", link: "https://github.com/JaganReddy-dev/" },
+]
 
 const Connect = () => {
   return (
-    <section id="connect" className="flex py-12 md:py-20 flex-col">
-      <div className="gap-10">
+    <section id="connect" className="flex py-12 md:py-20 flex-col px-4">
+      <div className="max-w-5xl mx-auto w-full gap-10">
         <h1 className="text-4xl font-semibold text-indigo-400 uppercase tracking-widest text-center">
           Connect
         </h1>
         <h2 className="text-3xl font-medium text-white leading-tight mb-10 text-center">
           Find me around <span className="text-indigo-400">The Web</span>
         </h2>
-      </div>
 
-      <div className="flex md:flex-row items-center flex-col w-full justify-center gap-5 mt-5">
-        <ConnectCard
-          socialName="LinkedIn"
-          src="/LinkedIn.png"
-          link="https://www.linkedin.com/in/jagan368/"
-        />
-        <ConnectCard
-          socialName="Medium"
-          src="/Medium.png"
-          link="https://medium.com/@jagan_reddy"
-        />
-        <ConnectCard
-          socialName="GitHub"
-          src="/GitHub.png"
-          link="https://github.com/JaganReddy-dev/"
+        <AccordionGallery
+          items={socialLinks}
+          defaultIndex={0}
+          accentColor="#818cf8"
+          height={340}
+          expandRatio={0.5}
+          trigger="hover"
+          grayscale
         />
       </div>
     </section>

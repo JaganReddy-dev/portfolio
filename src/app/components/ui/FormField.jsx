@@ -24,7 +24,7 @@ const FormField = ({
     if (value && !error) {
       return `${baseClasses} border-green-500 focus:border-green-500 focus:ring-green-500`
     }
-    return `${baseClasses} border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500`
+    return `${baseClasses} border-gray-300 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500`
   }
 
   return (

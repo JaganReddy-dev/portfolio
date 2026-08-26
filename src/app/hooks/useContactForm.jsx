@@ -14,6 +14,7 @@ const useContactForm = () => {
   });
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -40,6 +41,7 @@ const useContactForm = () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -59,10 +61,10 @@ const useContactForm = () => {
         resetForm();
         setTimeout(() => setShowSuccessDialog(false), 5000);
       } else {
-        alert("Failed to send message. Please try again.");
+        setSubmitError("Failed to send message. Please try again.");
       }
     } catch (error) {
-      alert("Failed to send message. Please try again.");
+      setSubmitError("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -73,9 +75,11 @@ const useContactForm = () => {
     validationErrors,
     showSuccessDialog,
     isSubmitting,
+    submitError,
     handleInputChange,
     submitForm,
     setShowSuccessDialog,
+    clearSubmitError: () => setSubmitError(null),
   };
 };
 

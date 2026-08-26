@@ -21,7 +21,7 @@ const Experience = () => {
               <div
                 className="
                 hidden md:block absolute left-2 top-6 w-4 h-4 rounded-full
-                bg-blue-500 border-4 border-black
+                bg-indigo-500 border-4 border-black
                 group-hover:scale-110 transition-transform
               "
               />
@@ -40,7 +40,7 @@ const Experience = () => {
                     <h2 className="text-2xl font-semibold text-white">
                       {exp.company}
                     </h2>
-                    <p className="text-blue-400 font-medium mt-1">{exp.role}</p>
+                    <p className="text-indigo-400 font-medium mt-1">{exp.role}</p>
                   </div>
 
                   <span className="text-sm text-gray-400">{exp.duration}</span>
@@ -53,7 +53,7 @@ const Experience = () => {
                       key={idx}
                       className="flex items-start text-gray-300 leading-relaxed"
                     >
-                      <span className="mr-3 mt-1 text-blue-400">•</span>
+                      <span className="mr-3 mt-1 text-indigo-400">•</span>
                       <span>{item}</span>
                     </li>
                   ))}

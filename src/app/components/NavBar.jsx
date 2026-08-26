@@ -8,6 +8,7 @@ import HamburgerButton from "./ui/HamburgerButton"
 
 const navLinks = [
   { href: "#experience", label: "Experience" },
+  { href: "#articles", label: "Articles" },
   { href: "#projects", label: "Projects" },
   { href: "#connect", label: "Connect" },
   { href: "#contact", label: "Contact" },
