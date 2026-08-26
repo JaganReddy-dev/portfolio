@@ -11,14 +11,13 @@ import ScrollToTop from "./components/buttons/ScrollToTop"
 const page = () => {
   return (
     <div className="bg-gradient-to-b from-indigo-700/10 to-transparent">
-      <AppShell>
+      <AppShell footer={<Footer />}>
         <Hero />
         <Experience />
         <Articles />
         <Projects />
         <Connect />
         <Contact />
-        <Footer />
       </AppShell>
       <ScrollToTop />
     </div>

@@ -27,6 +27,14 @@ const DepthCarousel = ({
   showControls = true,
   showIndicators = true,
   onChange,
+  // "drag": legacy continuous wheel-accumulate behavior (horizontal/shift
+  //   wheel input only; plain vertical scroll passes through untouched).
+  // "step": one discrete card per scroll gesture, driven by plain vertical
+  //   wheel/trackpad input, with gesture-locking so a single continuous
+  //   scroll can't skip several cards. At the first/last card (when
+  //   `loop` is false) the boundary event is *not* captured, so normal
+  //   page scroll resumes seamlessly instead of getting trapped.
+  wheelMode = "drag",
   className = "",
 }) => {
   const data = useMemo(() => (Array.isArray(items) ? items : []), [items])
@@ -46,6 +54,7 @@ const DepthCarousel = ({
 
   const dragRef = useRef(null)
   const wheelTimerRef = useRef(null)
+  const wheelLockRef = useRef(false)
   const autoTimerRef = useRef(null)
   const reducedRef = useRef(false)
 
@@ -66,6 +75,7 @@ const DepthCarousel = ({
     loop,
     cardWidth,
     autoplayDelay,
+    wheelMode,
   }
 
   const layout = useCallback((pos) => {
@@ -182,7 +192,8 @@ const DepthCarousel = ({
   useEffect(() => {
     const el = rootRef.current
     if (!el) return
-    const onWheel = (e) => {
+
+    const onWheelDrag = (e) => {
       const cfg = cfgRef.current
       if (cfg.count < 2) return
 
@@ -207,12 +218,49 @@ const DepthCarousel = ({
       // half-transitioned, half-transparent in-between frame.
       wheelTimerRef.current = setTimeout(() => setFocus(Math.round(posRef.current), true), 90)
     }
+
+    const onWheelStep = (e) => {
+      const cfg = cfgRef.current
+      if (cfg.count < 2) return
+
+      // While a step's tween is still settling, swallow the rest of the same
+      // continuous gesture (a trackpad flick can fire dozens of wheel
+      // events) so one gesture never advances more than one card.
+      if (wheelLockRef.current) {
+        e.preventDefault()
+        return
+      }
+
+      const dir = Math.sign(e.deltaY || e.deltaX)
+      if (dir === 0) return
+
+      const atStart = focusRef.current <= 0
+      const atEnd = focusRef.current >= cfg.count - 1
+      const wouldLeaveBounds = !cfg.loop && ((dir < 0 && atStart) || (dir > 0 && atEnd))
+
+      // At a non-looping boundary, don't capture the event: let it bubble so
+      // the page keeps scrolling past the section instead of trapping the
+      // user's scroll here forever.
+      if (wouldLeaveBounds) return
+
+      e.preventDefault()
+      wheelLockRef.current = true
+      navigateBy(dir)
+      const unlockAfter = cfg.duration + 100
+      if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current)
+      wheelTimerRef.current = setTimeout(() => {
+        wheelLockRef.current = false
+      }, unlockAfter)
+    }
+
+    const onWheel = cfgRef.current.wheelMode === "step" ? onWheelStep : onWheelDrag
     el.addEventListener("wheel", onWheel, { passive: false })
     return () => {
       el.removeEventListener("wheel", onWheel)
       if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current)
     }
-  }, [layout, setFocus])
+  }, [layout, setFocus, navigateBy, wheelMode])
+
 
   const onPointerDown = useCallback((e) => {
     const cfg = cfgRef.current

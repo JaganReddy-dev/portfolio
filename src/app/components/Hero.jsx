@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Typewriter from "./ui/TypeWriter"
-import MaskedHeading from "./ui/reactbits/MaskedHeading"
+import ParticleText from "./ui/reactbits/ParticleText"
 
 const Hero = () => {
   const tech = [
@@ -26,6 +26,34 @@ const Hero = () => {
 
       {/* Content wrapper */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Heading formed from gathering particles (ParticleText),
+            replacing the old masked-heading reveal entirely. Full width
+            here (not squeezed into the photo/text column below) so it has
+            room to render at a readable size. */}
+        <div className="h-56 sm:h-64 md:h-80 lg:h-96 w-full mb-8">
+          <h1 className="h-full w-full m-0">
+            <ParticleText
+              text={"Building scalable & \n performant web apps"}
+              fillHeight={0.92}
+              fillWidth={0.95}
+              fontWeight={700}
+              fontFamily="inherit"
+              color="#c7d2fe"
+              highlightColor="#6366f1"
+              trigger="mount"
+              density={3}
+              particleSize={2}
+              scatter={160}
+              gatherDuration={1400}
+              stagger={360}
+              pointerRepel={36}
+              repelRadius={110}
+              idleDrift={0.5}
+              glow
+            />
+          </h1>
+        </div>
+
         <div className="flex flex-col md:flex-row items-center justify-center gap-16">
           {/* Profile */}
           <div className="flex flex-col items-center">
@@ -47,32 +75,13 @@ const Hero = () => {
 
           {/* Text */}
           <div className="md:w-3/5 space-y-6 text-center md:text-left">
-            <MaskedHeading
-              text="Building scalable, performant web applications"
-              tag="h1"
-              mediaType="gradient"
-              gradient="linear-gradient(135deg, #ffffff 0%, #c7d2fe 30%, #a5b4fc 55%, #6366f1 100%)"
-              align="center"
-              reveal="rise"
-              trigger="view"
-              duration={1}
-              stagger={0.06}
-              textScale={0.1}
-              weight={800}
-              fillScale={1.1}
-              parallax={16}
-              drift={8}
-              className="text-white md:text-left drop-shadow-[0_4px_30px_rgba(99,102,241,0.35)]"
-              style={{ textAlign: "inherit" }}
-            />
-
             <p className="text-lg text-gray-400 max-w-xl mx-auto md:mx-0 leading-relaxed">
               I’m <span className="text-white font-medium">Jagan Reddy</span>, a
               software engineer focused on crafting clean, reliable web
               experiences using modern frontend and backend technologies.
             </p>
 
-            <div className="min-h-[2rem] text-indigo-400 font-medium">
+            <div className="min-h-8 text-indigo-400 font-medium">
               <Typewriter tech={tech} />
             </div>
 

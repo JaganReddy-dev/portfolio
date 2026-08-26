@@ -117,6 +117,8 @@ const Articles = () => {
               falloff={0.22}
               showIndicators
               showControls
+              loop={false}
+              wheelMode="step"
             />
           </div>
         )}
