@@ -10,8 +10,7 @@ import ScrollToTop from "./components/buttons/ScrollToTop"
 
 const page = () => {
   return (
-<<<<<<< HEAD
-    <div className="bg-gradient-to-b from-indigo-700/10 to-transparent">
+    <div className="bg-linear-to-b from-indigo-700/10 to-transparent">
       <AppShell footer={<Footer />}>
         <Hero />
         <Experience />
@@ -20,18 +19,6 @@ const page = () => {
         <Connect />
         <Contact />
       </AppShell>
-=======
-    <div className="bg-linear-to-b from-indigo-700/10 to-transparent">
-      <NavBar />
-      <ScrollNav />
-      <Hero />
-      <Experience />
-      <Articles />
-      <Projects />
-      <Connect />
-      <Contact />
-      <Footer />
->>>>>>> 6c49f39 (fix tailwind classes)
       <ScrollToTop />
     </div>
   )

@@ -3,6 +3,7 @@
 import Brand from "./Brand"
 import LineSidebar from "./ui/reactbits/LineSidebar"
 import useActiveSection from "../hooks/useActiveSection"
+import NavBar from "./NavBar"
 
 const SECTIONS = [
   { id: "hero", label: "Hero" },
@@ -21,17 +22,12 @@ const AppShell = ({ children, footer }) => {
 
   return (
     <>
-      <Brand />
-
-      {/*
-        Root cause of the old "section list overlaps content" bug: the
-        sidebar was `position: fixed` with no matching reserved space, so it
-        floated on top of whatever happened to be underneath at that
-        viewport width. Here the sidebar lives in a real flex column
-        (`aside`) that the main content column can never render under —
-        no overlap is possible regardless of viewport size, without resorting
-        to opacity tricks.
-      */}
+      <div className="lg:hidden">
+        <NavBar />
+      </div>
+      <div className="hidden lg:block">
+        <Brand />
+      </div>
       <div className="flex">
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-0 flex h-screen items-center pl-10">
@@ -48,46 +44,8 @@ const AppShell = ({ children, footer }) => {
             />
           </div>
         </aside>
-
-        <main className="flex-1 min-w-0">
-          {/* Smaller screens get a sticky horizontal strip instead of the
-              hover-driven vertical sidebar — same active-section data, an
-              interaction model that actually works on touch. */}
-          <nav
-            aria-label="Section navigation"
-            className="lg:hidden sticky top-0 z-20 flex gap-2 overflow-x-auto border-b border-white/5 bg-black/60 px-4 py-3 backdrop-blur-md [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {SECTIONS.map((section, index) => (
-              <button
-                key={section.id}
-                type="button"
-                onClick={() => scrollToSection(index)}
-                aria-current={activeIndex === index ? "true" : undefined}
-                className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
-                  activeIndex === index
-                    ? "bg-indigo-500 text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                {section.label}
-              </button>
-            ))}
-          </nav>
-
-          {children}
-        </main>
+        <main className="flex-1 min-w-0">{children}</main>
       </div>
-
-      {/*
-        Root cause of the footer being "cut off on the left": it used to
-        render inside <main>, which sits beside the reserved sidebar gutter
-        above — so its full-bleed black background only spanned the main
-        column's width instead of the full viewport. Rendering it as a
-        sibling *after* the flex row (full width, below the sidebar) fixes
-        that at the layout level instead of patching it with overflow
-        tricks, and as a bonus the sticky sidebar naturally stops once
-        content ends instead of floating next to the footer.
-      */}
       {footer}
     </>
   )

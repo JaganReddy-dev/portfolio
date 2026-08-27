@@ -59,7 +59,7 @@ export const ProjectDetail = ({ project }) => {
     <div className="p-6 md:p-8">
       <div className="flex items-center gap-4 mb-5 pr-8">
         <div
-          className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl"
+          className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl"
           style={{
             background: `linear-gradient(135deg, ${project.accentFrom}22, ${project.accentTo}33)`,
             border: `1px solid ${project.accentFrom}44`,
@@ -108,7 +108,7 @@ export const ProjectDetail = ({ project }) => {
               className="flex items-start gap-2.5 text-sm text-gray-400 bg-gray-800 bg-opacity-50 rounded-lg px-3 py-2.5"
             >
               <svg
-                className="flex-shrink-0 mt-0.5"
+                className="shrink-0 mt-0.5"
                 width="14"
                 height="14"
                 viewBox="0 0 14 14"
@@ -151,7 +151,7 @@ export const ProjectDetail = ({ project }) => {
                 }`}
               >
                 <span
-                  className="flex-shrink-0 text-xs font-bold font-mono w-14 text-center py-0.5 rounded"
+                  className="shrink-0 text-xs font-bold font-mono w-14 text-center py-0.5 rounded"
                   style={{
                     color:
                       ep.method === "GET"
