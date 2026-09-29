@@ -7,10 +7,10 @@ const DesktopMenu = ({ links, onLinkClick }) => {
             href={link.href}
             onClick={(e) => onLinkClick(e, link.href)}
             className="
-              relative text-gray-300 hover:text-white
+              relative text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white
               transition-colors duration-200
               after:absolute after:left-0 after:-bottom-1
-              after:h-px after:w-0 after:bg-indigo-400
+              after:h-px after:w-0 after:bg-indigo-600 dark:after:bg-indigo-400
               after:transition-all after:duration-300
               hover:after:w-full
             "

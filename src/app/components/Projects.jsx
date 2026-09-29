@@ -26,13 +26,13 @@ export default function Projects() {
     <section id="projects" className="relative w-full py-12 md:py-20 px-4">
       <div className="relative z-10 max-w-5xl mx-auto">
         <div className="mb-10">
-          <span className="text-3xl font-semibold text-indigo-400 uppercase tracking-widest">
+          <span className="text-3xl font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">
             Projects
           </span>
-          <h2 className="text-4xl font-bold text-white leading-tight mt-3">
-            Things I&apos;ve <span className="text-indigo-400">built</span>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white leading-tight mt-3">
+            Things I&apos;ve <span className="text-indigo-600 dark:text-indigo-400">built</span>
           </h2>
-          <p className="text-gray-500 text-sm mt-2 max-w-lg leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-500 text-sm mt-2 max-w-lg leading-relaxed">
             A collection of backend services and full-stack applications — auth
             systems, URL infrastructure, OAuth integrations, and analytics.
           </p>

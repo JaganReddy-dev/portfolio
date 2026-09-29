@@ -11,12 +11,16 @@
                    active states, and highlighted words so it keeps its punch.
 */
 :root {
-  --background: #ffffff;
+  --background: #f8fafc;
   --foreground: #171717;
   --color-dominant: #05050a;
   --color-secondary: #111827;
   --color-accent: #6366f1;
   --color-accent-strong: #818cf8;
+  --tile-bg: rgba(255, 255, 255, 0.85);
+  --tile-border: rgba(15, 23, 42, 0.08);
+  --tile-border-hover: rgba(15, 23, 42, 0.16);
+  --tile-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
 }
 
 @theme inline {
@@ -30,6 +34,10 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --tile-bg: rgba(17, 24, 39, 0.6);
+    --tile-border: rgba(255, 255, 255, 0.08);
+    --tile-border-hover: rgba(255, 255, 255, 0.18);
+    --tile-shadow: 0 0 #0000;
   }
 }
 
@@ -48,8 +56,8 @@ body {
 .bento-tile {
   position: relative;
   border-radius: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(17, 24, 39, 0.6);
+  border: 1px solid var(--tile-border);
+  background: var(--tile-bg);
   backdrop-filter: blur(6px);
   overflow: hidden;
   transition:
@@ -60,7 +68,7 @@ body {
 
 .bento-tile:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: var(--tile-border-hover);
 }
 
 .bento-tile:focus-within {

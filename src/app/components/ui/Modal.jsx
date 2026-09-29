@@ -22,12 +22,12 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start md:items-center justify-center p-4 md:p-8 overflow-y-auto bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start md:items-center justify-center p-4 md:p-8 overflow-y-auto bg-black/40 dark:bg-black/70 backdrop-blur-sm"
       onClick={onClose}
       role="presentation"
     >
       <div
-        className="relative w-full max-w-2xl my-8 md:my-0 rounded-2xl border border-gray-800 bg-gray-900 shadow-2xl"
+        className="relative w-full max-w-2xl my-8 md:my-0 rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -35,7 +35,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center border border-gray-700 bg-gray-800 text-gray-400 hover:text-white hover:border-gray-600 transition-colors z-10"
+          className="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center border border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-900 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-white dark:hover:border-gray-600 transition-colors z-10"
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path

@@ -16,7 +16,7 @@ const FormField = ({
 }) => {
   const getFieldClasses = () => {
     const baseClasses =
-      "w-full px-4 py-3 border rounded-lg focus:ring-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+      "w-full px-4 py-3 border rounded-lg focus:ring-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-200"
 
     if (error) {
       return `${baseClasses} border-red-500 focus:border-red-500 focus:ring-red-500`

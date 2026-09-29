@@ -1,8 +1,12 @@
+"use client"
+
 import Image from "next/image"
 import Typewriter from "./ui/TypeWriter"
 import ParticleText from "./ui/reactbits/ParticleText"
+import usePrefersDark from "../hooks/usePrefersDark"
 
 const Hero = () => {
+  const prefersDark = usePrefersDark()
   const tech = [
     "React",
     "TypeScript",
@@ -38,7 +42,7 @@ const Hero = () => {
               fillWidth={0.95}
               fontWeight={700}
               fontFamily="inherit"
-              color="#c7d2fe"
+              color={prefersDark ? "#c7d2fe" : "#312e81"}
               highlightColor="#6366f1"
               trigger="mount"
               density={3}
@@ -57,7 +61,7 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center justify-center gap-16">
           {/* Profile */}
           <div className="flex flex-col items-center">
-            <div className="relative w-44 h-44 rounded-full overflow-hidden border border-gray-700">
+            <div className="relative w-44 h-44 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700">
               <Image
                 src="/Hero.png"
                 alt="Profile picture of Jagan Reddy"
@@ -68,20 +72,20 @@ const Hero = () => {
                 fetchPriority="high"
               />
             </div>
-            <p className="mt-4 text-sm text-gray-400 text-center">
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
               Software Engineer • Web Developer
             </p>
           </div>
 
           {/* Text */}
           <div className="md:w-3/5 space-y-6 text-center md:text-left">
-            <p className="text-lg text-gray-400 max-w-xl mx-auto md:mx-0 leading-relaxed">
-              I’m <span className="text-white font-medium">Jagan Reddy</span>, a
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto md:mx-0 leading-relaxed">
+              I’m <span className="text-gray-900 dark:text-white font-medium">Jagan Reddy</span>, a
               software engineer focused on crafting clean, reliable web
               experiences using modern frontend and backend technologies.
             </p>
 
-            <div className="min-h-8 text-indigo-400 font-medium">
+            <div className="min-h-8 text-indigo-600 dark:text-indigo-400 font-medium">
               <Typewriter tech={tech} />
             </div>
 

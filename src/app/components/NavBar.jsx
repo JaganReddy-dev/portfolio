@@ -43,11 +43,11 @@ const NavBar = () => {
       <header
         className={`
           fixed top-0 w-full z-30 transition-all
-          ${isScrolled ? "bg-black/70 backdrop-blur-md" : "bg-transparent"}
+          ${isScrolled ? "bg-white/80 dark:bg-black/70 backdrop-blur-md shadow-sm dark:shadow-none" : "bg-transparent"}
         `}
       >
         <nav className="max-w-full mx-auto flex items-center justify-between px-6 py-4">
-          <Link href="/" className="text-lg font-semibold text-white">
+          <Link href="/" className="text-lg font-semibold text-gray-900 dark:text-white">
             Jagan Reddy
           </Link>
 
@@ -55,12 +55,14 @@ const NavBar = () => {
             {!isScrolled && (
               <DesktopMenu links={navLinks} onLinkClick={handleSmoothScroll} />
             )}
-            {isScrolled && (
+            {/* Phones always get the hamburger (the inline links are
+                hidden below md); tablets only once scrolled. */}
+            <div className={isScrolled ? "flex" : "flex md:hidden"}>
               <HamburgerButton
                 isMenuOpen={isMenuOpen}
                 onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
               />
-            )}
+            </div>
           </div>
         </nav>
       </header>

@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react"
 import Particles from "./ui/reactbits/Particles"
+import usePrefersDark from "../hooks/usePrefersDark"
 
 const GlobalParticles = () => {
   const [reducedMotion, setReducedMotion] = useState(false)
+  const prefersDark = usePrefersDark()
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -27,10 +29,16 @@ const GlobalParticles = () => {
       style={{ pointerEvents: "none" }}
     >
       <Particles
+        // Particles only reads its colors on mount, so remount on theme change
+        key={prefersDark ? "dark" : "light"}
         particleCount={reducedMotion ? 0 : 190}
         particleSpread={15}
         speed={0.1}
-        particleColors={["#6366f1", "#818cf8", "#ffffff"]}
+        particleColors={
+          prefersDark
+            ? ["#6366f1", "#818cf8", "#ffffff"]
+            : ["#4f46e5", "#6366f1", "#94a3b8"]
+        }
         // Hover-reactivity listens on window (not this container) so the
         // drift effect still works even though the container itself has
         // pointer-events: none.

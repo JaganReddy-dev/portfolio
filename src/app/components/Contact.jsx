@@ -25,12 +25,12 @@ const Contact = () => {
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white">Contact Me</h1>
-            <p className="mt-3 text-gray-400">Let’s build something together</p>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Contact Me</h1>
+            <p className="mt-3 text-gray-600 dark:text-gray-400">Let’s build something together</p>
           </div>
 
           {/* Form container */}
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/60 backdrop-blur-sm p-8">
+          <div className="rounded-2xl border border-gray-200 bg-white/85 shadow-sm dark:shadow-none dark:border-gray-800 dark:bg-gray-900/60 backdrop-blur-sm p-6 sm:p-8">
             {submitError && (
               <div className="mb-6">
                 <ErrorState
@@ -88,9 +88,9 @@ const Contact = () => {
                 type="button"
                 onClick={submitForm}
                 disabled={isSubmitting}
-                className={`w-full rounded-xl px-6 py-3 font-medium transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-black ${
+                className={`w-full rounded-xl px-6 py-3 font-medium transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-black ${
                   isSubmitting
-                    ? "bg-gray-600 text-white cursor-not-allowed"
+                    ? "bg-gray-400 dark:bg-gray-600 text-white cursor-not-allowed"
                     : "bg-indigo-500 text-white hover:bg-indigo-600 hover:-translate-y-0.5"
                 }`}
               >

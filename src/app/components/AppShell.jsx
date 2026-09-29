@@ -4,6 +4,7 @@ import Brand from "./Brand"
 import LineSidebar from "./ui/reactbits/LineSidebar"
 import useActiveSection from "../hooks/useActiveSection"
 import NavBar from "./NavBar"
+import usePrefersDark from "../hooks/usePrefersDark"
 
 const SECTIONS = [
   { id: "hero", label: "Hero" },
@@ -19,6 +20,7 @@ const SECTION_LABELS = SECTIONS.map((s) => s.label)
 
 const AppShell = ({ children, footer }) => {
   const { activeIndex, scrollToSection } = useActiveSection(SECTION_IDS)
+  const prefersDark = usePrefersDark()
 
   return (
     <>
@@ -35,9 +37,9 @@ const AppShell = ({ children, footer }) => {
               items={SECTION_LABELS}
               activeIndex={activeIndex}
               onItemClick={scrollToSection}
-              accentColor="#818cf8"
-              textColor="#9ca3af"
-              markerColor="#4b5563"
+              accentColor={prefersDark ? "#818cf8" : "#4f46e5"}
+              textColor={prefersDark ? "#9ca3af" : "#4b5563"}
+              markerColor={prefersDark ? "#4b5563" : "#9ca3af"}
               fontSize={0.95}
               markerLength={32}
               itemGap={18}
